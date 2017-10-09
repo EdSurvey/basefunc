@@ -1,0 +1,11 @@
+cd ~/PycharmProjects/EdSurvey/basefunc/EdSurvey
+workon django
+. alias
+makemigrations
+migrate
+manage createsuperuser
+    admin
+    admin@a.org
+    zxasqw12
+django-shell
+    import setup

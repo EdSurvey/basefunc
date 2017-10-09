@@ -1,0 +1,4 @@
+alias django-shell='python manage.py shell'
+alias manage='python manage.py'
+alias makemigrations='python manage.py makemigrations'
+alias migrate='python manage.py migrate'
