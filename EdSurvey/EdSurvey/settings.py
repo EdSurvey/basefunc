@@ -38,12 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-#    'home.apps.HomeConfig',
-#    'questions.apps.QuestionsConfig',
-#    'querylists.apps.QuerylistsConfig',
-#    'schedules.apps.SchedulesConfig',
-#    'surveys.apps.SurveysConfig',
-#    'clients.apps.ClientsConfig',
+    'home.apps.HomeConfig',
+    # 'questions.apps.QuestionsConfig',
+    # 'querylists.apps.QuerylistsConfig',
+    # 'schedules.apps.SchedulesConfig',
+    # 'surveys.apps.SurveysConfig',
+    # 'clients.apps.ClientsConfig',
 ]
 
 MIDDLEWARE = [
