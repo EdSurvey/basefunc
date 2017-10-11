@@ -93,3 +93,16 @@ def division_post_save(instance, **kwargs):
                                       rootdivision=instance)
 
 post_save.connect(division_post_save, sender=Division)
+
+
+class Role(models.Model):
+    name = models.CharField('название', max_length=60, unique=True)
+    shortname = models.CharField('абревиатура', max_length=30, unique=True)
+    description = models.TextField('описание')
+
+    class Meta:
+        verbose_name = 'роль'
+        verbose_name_plural = 'роли'
+
+    def __str__(self):
+        return "{}".format(self.name)

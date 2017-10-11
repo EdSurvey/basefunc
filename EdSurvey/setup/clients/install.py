@@ -48,3 +48,21 @@ client_the_site_data = ClientData(
     rootdivision=division_the_site,
 )
 client_the_site_data.save()
+
+#
+#   clients Role
+#
+from clients.models import Role
+
+role_testee = Role.objects.create(
+    id=0,
+    name='Тестируемый',
+    shortname='TESTEE',
+    description="""Предопределённая Роль - могут проходить назначенные и публичные опросы.""",
+)
+role_user = Role.objects.create(
+    id=1,
+    name='Пользователь',
+    shortname='USER',
+    description="""Предопределённая Роль - могут создавать свой персональный контент и использовать публичный.""",
+)
