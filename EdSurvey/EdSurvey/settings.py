@@ -39,11 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
+    'clients.apps.ClientsConfig',
     # 'questions.apps.QuestionsConfig',
     # 'querylists.apps.QuerylistsConfig',
     # 'schedules.apps.SchedulesConfig',
     # 'surveys.apps.SurveysConfig',
-    # 'clients.apps.ClientsConfig',
 ]
 
 MIDDLEWARE = [

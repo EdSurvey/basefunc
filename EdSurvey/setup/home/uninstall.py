@@ -1,4 +1,4 @@
-# from ..clients import uninstall
+from ..clients import uninstall
 
 from django.contrib.auth.models import User, Group
 
