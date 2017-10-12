@@ -135,3 +135,21 @@ class Person(models.Model):
 
 def get_active_person(request):
     return get_object_or_404(Person, pk=request.session['person_id'])
+
+
+class Squad(models.Model):
+    """ Рабочая группа (бригада) """
+    name = models.CharField('название', max_length=60)
+    shortname = models.CharField('абревиатура', max_length=30)
+    description = models.TextField('описание', null=True, blank=True)
+    division = models.ForeignKey(Division, verbose_name='организация')
+    owner = models.ForeignKey(User, verbose_name='владелец')
+    members = models.ManyToManyField(Person, verbose_name='участники')
+
+    class Meta:
+        verbose_name = 'рабочая группа'
+        verbose_name_plural = 'рабочие группы'
+        unique_together = (('shortname', 'owner',),)
+
+    def __str__(self):
+        return "{} для {}".format(self.shortname, self.division.shortname)
