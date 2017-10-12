@@ -66,3 +66,34 @@ role_user = Role.objects.create(
     shortname='USER',
     description="""Предопределённая Роль - могут создавать свой персональный контент и использовать публичный.""",
 )
+
+#
+#   clients Person
+#
+from clients.models import Person
+from ..home.install import user_site1, user_site2
+
+def add_person(user, shortname, division, roles):
+    print("Adding: user={}, shortname={}, division={}".format(user, shortname, division))
+    print(" roles:", ", ".join(('"{}"'.format(r) for r in roles)))
+    person = Person(
+        user=user,
+        shortname=shortname,
+        division=division,
+    )
+    person.save()
+    person.roles.add(*roles)
+    return person
+
+site1_user = add_person(
+    user=user_site1,
+    shortname='Первый',
+    division=division_the_site,
+    roles=(role_user, role_testee,),
+)
+site2_user = add_person(
+    user=user_site2,
+    shortname='Второй',
+    division=division_the_site,
+    roles=(role_user, role_testee,),
+)

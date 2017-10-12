@@ -12,6 +12,17 @@ user_site1 = User.objects.create_user(
 user_site1.set_password("zxasqw12")
 user_site1.save()
 
+user_site2 = User.objects.create_user(
+    username = 'site2',
+    first_name = 'Петя',
+    last_name = 'Васечкин',
+    email = 'site2@edsurvey.org',
+    is_staff = False,
+    is_active = True,
+)
+user_site2.set_password("zxasqw12")
+user_site2.save()
+
 user_freebee = User.objects.create_user(
     username='freebee',
     first_name='Иван',

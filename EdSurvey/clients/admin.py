@@ -1,7 +1,7 @@
 #   clients.admin
 from django.contrib import admin
 
-from .models import Client, Division, ClientData, Role
+from .models import Client, Division, ClientData, Role, Person
 
 
 class DivisionAdmin(admin.TabularInline):
@@ -38,3 +38,10 @@ class RoleAdmin(admin.ModelAdmin):
     list_display = ('name', 'shortname', 'description')
 
 admin.site.register(Role, RoleAdmin)
+
+
+class PersonAdmin(admin.ModelAdmin):
+    model = Person
+    list_display = ('user', 'shortname', 'division',)   #  'roles',
+
+admin.site.register(Person, PersonAdmin)

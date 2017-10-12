@@ -1,6 +1,9 @@
-from django.db import models
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db.models.signals import post_save
+from django.shortcuts import get_object_or_404
+from django.utils.timezone import now
+from django.db import models
 
 
 class Client(models.Model):
@@ -106,3 +109,29 @@ class Role(models.Model):
 
     def __str__(self):
         return "{}".format(self.name)
+
+
+class Person(models.Model):
+    """ Личность
+
+    Позволяет создать алиасы Пользователей
+    для дальнейшей работы с различными Клиентами
+    """
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    shortname = models.CharField('aka', max_length=30)
+    division = models.ForeignKey(Division, on_delete=models.PROTECT, verbose_name='входит в организацию')
+    # role = models.ForeignKey(Role, on_delete=models.PROTECT, verbose_name='доступная роль')
+    roles = models.ManyToManyField(Role, blank=True, verbose_name='роли')
+    used = models.DateTimeField(auto_now_add=now())
+
+    class Meta:
+        verbose_name = 'личность'
+        verbose_name_plural = 'личности'
+        unique_together = (('user', 'shortname',),)
+
+    def __str__(self):
+        return '{} {} aka "{}"'.format(self.user.first_name, self.user.last_name, self.shortname)
+
+
+def get_active_person(request):
+    return get_object_or_404(Person, pk=request.session['person_id'])
