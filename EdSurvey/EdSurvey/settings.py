@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'clients.apps.ClientsConfig',
-    # 'questions.apps.QuestionsConfig',
+    'questions.apps.QuestionsConfig',
     # 'querylists.apps.QuerylistsConfig',
     # 'schedules.apps.SchedulesConfig',
     # 'surveys.apps.SurveysConfig',
