@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import pre_save
 from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 
 from clients.models import Division, Person
 
@@ -31,6 +32,22 @@ class Question(models.Model):
 
     def __str__(self):
         return "{}.{}.{}".format(self.id, self.qtype, self.name)
+
+
+def question_pre_save(instance, **kwargs):
+    # Проверка на изменение типа вопроса (qtype)
+    # select 1 from Answer where Answer.question = self.id limit 1
+    cntRB = AnswerRB.objects.all().filter(question=instance)[:1].count()
+    cntCB = AnswerCB.objects.all().filter(question=instance)[:1].count()
+    cntLL = AnswerLL.objects.all().filter(question=instance)[:1].count()
+    if instance.qtype not in [qtype for qtype,txt in QUESTION_TYPE_CHOICES]:
+        raise ValidationError(_("Unknown QType"))
+    elif (instance.qtype == RADIOBUTTON and (cntCB + cntLL) > 0) or \
+        (instance.qtype == CHECKBOX and (cntRB + cntLL) > 0) or \
+        (instance.qtype == LINKEDLISTS and (cntRB + cntCB) > 0) :
+        raise ValidationError("Нельзя изменять тип вопроса, если вопрос всё ещё имеет ответы.")
+
+pre_save.connect(question_pre_save, sender=Question)
 
 
 class Answer(models.Model):
