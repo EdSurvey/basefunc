@@ -1,0 +1,10 @@
+{% extends 'home.htm' %}
+{% block mainblock %}
+
+<form method="POST">
+    {{form.as_p}}
+    {% csrf_token %}
+    <input type="submit" value="Ok">
+</form>
+
+{% endblock %}

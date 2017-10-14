@@ -11,6 +11,19 @@
 <div class="page-header">
     <h1><a href="/">Education by Survey</a></h1>
     <h6><i>Самый простой способ получить ответ - задать вопрос.</i></h6>
+    <div align="right">
+        {% if person %}
+            Добро пожаловать, <a href="{% url 'clients:aka' %}">{{person.shortname}}</a>!
+            ({{person.role}} в {{person.division}})
+        {% else %}
+            Кто ты такой, {{user}}?
+        {% endif %}
+        {% if user.username %}
+            [ {{user.username}} ] <a href="{% url 'logout' %}">выйти</a>
+        {% else %}
+            [ <a href="{% url 'login' %}">Войти</a> ]
+        {% endif %}
+    </div>
     <a href="/admin/" target="_blank">Админка</a> |
 </div>
 
