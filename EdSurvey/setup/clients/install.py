@@ -1,6 +1,5 @@
 from ..home import install
 
-
 #
 #   clients Client
 #
@@ -96,4 +95,42 @@ site2_user = add_person(
     shortname='Второй',
     division=division_the_site,
     roles=(role_user, role_testee,),
+)
+
+#
+#   clients Squad
+#
+from clients.models import Squad
+from ..home.install import user_freebee, user_freebee1
+
+def add_squad(name, shortname, description, division, owner, members):
+    print("Adding squad: name={}, shortname={}, division={}".format(name, shortname, division))
+    print("     members:", ", ".join(('"{}"'.format(r) for r in members)))
+    squad = Squad(
+        name=name,
+        shortname=shortname,
+        description=description,
+        division=division,
+        owner=owner,
+    )
+    squad.save()
+    squad.members.add(*members)
+    return squad
+
+squad_site_1 = add_squad(
+    name='Тест №1',
+    shortname='Тест №1',
+    description="""Для проверки базового функционала - первые пользователи""",
+    division=division_the_site_common,
+    owner=site1_user,
+    members=(user_site2, user_freebee,),
+)
+
+squad_site_2 = add_squad(
+    name='Тест №2',
+    shortname='Тест №2',
+    description="""Для проверки базового функционала - вторые пользователи""",
+    division=division_the_site_common,
+    owner=site2_user,
+    members=(user_site1, user_freebee1,),
 )

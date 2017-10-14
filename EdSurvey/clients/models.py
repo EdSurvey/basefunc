@@ -143,13 +143,13 @@ class Squad(models.Model):
     shortname = models.CharField('абревиатура', max_length=30)
     description = models.TextField('описание', null=True, blank=True)
     division = models.ForeignKey(Division, verbose_name='организация')
-    owner = models.ForeignKey(User, verbose_name='владелец')
-    members = models.ManyToManyField(Person, verbose_name='участники')
+    owner = models.ForeignKey(Person, verbose_name='личность-владелец')
+    members = models.ManyToManyField(User, verbose_name='пользователи-участники')
 
     class Meta:
         verbose_name = 'рабочая группа'
         verbose_name_plural = 'рабочие группы'
-        unique_together = (('shortname', 'owner',),)
+        unique_together = (('shortname', 'division'),)
 
     def __str__(self):
         return "{} для {}".format(self.shortname, self.division.shortname)
