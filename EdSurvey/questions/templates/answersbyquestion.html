@@ -1,0 +1,24 @@
+{% extends 'home.htm' %}
+{% block mainblock %}
+<h3>Вопрос: {{question.name}}</h3>
+<h4>Описание: {{question.description}}</h4>
+
+{% block answersblock %}
+<h4>Варианты ответов:</h4>
+    <table border="1">
+        <tr>
+            <th>Порядок</th>
+            <th>Текст ответа</th>
+            <th>Оценка</th>
+        </tr>
+{% for answer in answers %}
+        <tr>
+            <td>{% if answer.ordernum %}{{answer.ordernum}}{% else %}-{% endif %}</td>
+            <td>{{answer.content}}</td>
+            <td>{{answer.score}}</td>
+        </tr>
+{% endfor%}
+    </table>
+{% endblock%}
+
+{% endblock%}

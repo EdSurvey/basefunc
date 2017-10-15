@@ -18,7 +18,7 @@
             <td>{{question.get_qtype_display}}</td>
             <td>{{question.owner}}</td>
             <td>
-                <a href="./answersbyquestion/{{question.id}}">View</a>
+                <a href="{% url 'questions:answersbyquestion' question.id %}">View</a>
                 <a href="./answersbyquestion/{{question.id}}">Edit</a>
                 <a href="./answersbyquestion/{{question.id}}">Delete</a>
             </td>
