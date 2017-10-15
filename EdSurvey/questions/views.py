@@ -28,7 +28,7 @@ def index(request):
     )
 
 def answers_by_question(request, questionid):
-    question = get_object_or_404(Question, pk=questionid)
+    question = get_object_or_404(Question.with_perms.all(request.person), pk=questionid)
     if question.qtype in [RADIOBUTTON, CHECKBOX]:
         answers = Answer.objects.filter(question=question)
         return render(
