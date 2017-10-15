@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
+from django.db.models import Q
 
 from clients.models import Division, Person
 
@@ -15,6 +16,12 @@ QUESTION_TYPE_CHOICES = (
     (LINKEDLISTS, "Путанка"),
 )
 
+class QuestionManager(models.Manager):
+    def all(self, person):
+        qset = Q(public=True) | (Q(owner=person) & Q(division=person.division))
+        return super().get_queryset().filter(qset)
+
+
 class Question(models.Model):
     name = models.CharField('наименование', max_length=60)
     description = models.TextField('полное описание')
@@ -25,6 +32,9 @@ class Question(models.Model):
                              default=RADIOBUTTON,
                              verbose_name='Тип вопроса',)
     owner = models.ForeignKey(Person, on_delete=models.PROTECT, verbose_name='личность-владелец')
+
+    objects = models.Manager()
+    with_perms = QuestionManager()
 
     class Meta:
         verbose_name = 'Вопрос'

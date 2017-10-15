@@ -19,8 +19,8 @@ def index(request):
     Для всех моих - отображает кнопки [просмотреть],[изменить],[удалить]
     Для чужих public - отображает только кнопку [просмотреть]
     """
-    # person = Person.objects.get(pk=request.session['person_id'])
-    questions = Question.objects.all()
+    person = request.person
+    questions = Question.with_perms.all(person)
     return render(
         request,
         'questions.html',
