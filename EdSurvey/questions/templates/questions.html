@@ -1,8 +1,9 @@
 {% extends 'home.htm' %}
 {% block mainblock %}
     <h2>Вопросы</h2>
+    {{questions_filter_block}}
     <table border="1">
-        <tr>
+        <tr bgcolor="cyan">
             <th>Public</th>
             <th>Название</th>
             <th>Текст</th>
@@ -12,7 +13,7 @@
             <th>Действия</th>
         </tr>
 {% for question in questions %}
-        <tr>
+        <tr{% if not question.active %} bgcolor="gray"{% endif %}>
             <td>{% if question.public %} Да {% else %} Нет {% endif %}</td>
             <td>{{question.name}}</td>
             <td>{{question.description}}</td>
@@ -21,8 +22,10 @@
             <td>{{question.division}}</td>
             <td>
                 <a href="{% url 'questions:answersbyquestion' question.id %}">View</a>
-                <a href="./answersbyquestion/{{question.id}}">Edit</a>
-                <a href="./answersbyquestion/{{question.id}}">Delete</a>
+                {% if question.active %}
+                    <a href="./answersbyquestion/{{question.id}}">Edit</a>
+                    <a href="./answersbyquestion/{{question.id}}">Delete</a>
+                {% endif %}
             </td>
         </tr>
 {% endfor %}

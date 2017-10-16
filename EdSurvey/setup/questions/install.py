@@ -224,7 +224,7 @@ site_q7 = Question.objects.create(
     name='Unit9 - 3.3',
     description="""Choose the word that belong in the group.""",
     division=division_the_site,
-    public=False,
+    public=True,
     qtype=CHECKBOX,
     owner=site2_user,
 )

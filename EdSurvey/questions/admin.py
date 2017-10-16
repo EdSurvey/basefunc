@@ -35,7 +35,7 @@ class QuestionAdmin(admin.ModelAdmin):
     ordering = ('id',)
     fieldsets = [
         (None, {'fields': ['name', 'description', 'qtype',]}),
-        ('Приватность', {'fields': ['division', 'public', 'owner',]}),
+        ('Приватность', {'fields': ['division', 'owner', 'public', 'active',]}),
     ]
     inlines = [
         AnswerRBAdmin,

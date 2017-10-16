@@ -32,6 +32,7 @@ class Question(models.Model):
                              default=RADIOBUTTON,
                              verbose_name='Тип вопроса',)
     owner = models.ForeignKey(Person, on_delete=models.PROTECT, verbose_name='личность-владелец')
+    active = models.BooleanField('активно', default=True)
 
     objects = models.Manager()
     with_perms = QuestionManager()
