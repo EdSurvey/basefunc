@@ -2,6 +2,6 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index),
+    url(r'^$', views.index, name='index'),
     url(r'^answersbyquestion/(?P<questionid>\d+)$', views.answers_by_question, name='answersbyquestion'),
 ]

@@ -72,6 +72,7 @@ site_q3 = Question.objects.create(
     public=True,
     qtype=LINKEDLISTS,
     owner=site1_user,
+    active=False
 )
 site_q3_answer1 = AnswerLL.objects.create(
     question=site_q3,

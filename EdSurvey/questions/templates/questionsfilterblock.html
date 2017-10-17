@@ -1,5 +1,29 @@
-<p>Публичные = {{flt_q_pub}}</p>
-<p>Мои = {{flt_q_own}}</p>
-<p>Другие = {{flt_q_oth}}</p>
-<p>Активные = {{flt_q_act}}</p>
-<p>Архивные = {{flt_q_arc}}</p>
+    <div class="page-footer">
+        <input type="submit" value="Все" name="set_all">
+        <input type="submit" value="Сбросить" name="default">
+
+        <input type="checkbox" name="choice_pub" id="choice_pub" value="pub"
+               {% if flt_q_pub %} checked {% endif %}
+        />
+        <label for="choice_pub">Публичные</label>
+        <input type="checkbox" name="choice_own" id="choice_own" value="own"
+               {% if flt_q_own %} checked {% endif %}
+        />
+        <label for="choice_own">Мои</label>
+        <input type="checkbox" name="choice_oth" id="choice_oth" value="oth"
+               {% if flt_q_oth %} checked {% endif %}
+        />
+        <label for="choice_oth">Другие</label>
+        <input type="checkbox" name="choice_act" id="choice_act" value="act"
+               {% if flt_q_act %} checked {% endif %}
+        />
+        <label for="choice_act">Активные</label>
+        <input type="checkbox" name="choice_arc" id="choice_arc" value="arc"
+               {% if flt_q_arc %} checked {% endif %}
+        />
+        <label for="choice_arc">Архивные</label>
+
+        <input type="submit" value="Показать" name="filter">
+    </div>
+
+    <hr border-color="#7b6b6b">

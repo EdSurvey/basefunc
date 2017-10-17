@@ -1,7 +1,14 @@
 {% extends 'home.htm' %}
 {% block mainblock %}
     <h2>Вопросы</h2>
-    {{questions_filter_block}}
+
+<form action="{% url 'questions:index' %}" method="post">
+    {% csrf_token %}
+
+    {% block resultblock %}
+        {{questions_filter_block}}
+    {% endblock %}
+
     <table border="1">
         <tr bgcolor="cyan">
             <th>Public</th>
@@ -12,7 +19,7 @@
             <th>Организация</th>
             <th>Действия</th>
         </tr>
-{% for question in questions %}
+    {% for question in questions %}
         <tr{% if not question.active %} bgcolor="gray"{% endif %}>
             <td>{% if question.public %} Да {% else %} Нет {% endif %}</td>
             <td>{{question.name}}</td>
@@ -28,6 +35,7 @@
                 {% endif %}
             </td>
         </tr>
-{% endfor %}
+    {% endfor %}
     </table>
+</form>
 {% endblock %}

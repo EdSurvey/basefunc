@@ -1,7 +1,8 @@
-#   clients.admin
 from django.contrib import admin
 
 from .models import Client, Division, ClientData, Role, Person, Squad
+
+#   clients.admin
 
 
 class DivisionAdmin(admin.TabularInline):
