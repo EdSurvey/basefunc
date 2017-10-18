@@ -10,7 +10,7 @@
     {% endblock %}
 
     <table border="1">
-        <tr bgcolor="cyan">
+        <tr bgcolor="#FFA500">
             <th>Public</th>
             <th>Название</th>
             <th>Текст</th>
@@ -20,7 +20,7 @@
             <th>Действия</th>
         </tr>
     {% for question in questions %}
-        <tr{% if not question.active %} bgcolor="gray"{% endif %}>
+        <tr{% if not question.active %} bgcolor="Tan"{% endif %}>
             <td>{% if question.public %} Да {% else %} Нет {% endif %}</td>
             <td>{{question.name}}</td>
             <td>{{question.description}}</td>

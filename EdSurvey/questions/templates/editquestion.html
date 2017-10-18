@@ -2,7 +2,7 @@
 {% block mainblock %}
 
 <form method="post">
-    {{form}}
+    {{form.as_p}}
     {% csrf_token %}
     <input type="submit" value="Сохранить" name="save">
     <input type="submit" value="Удалить" name="del">
