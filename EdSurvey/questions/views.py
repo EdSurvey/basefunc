@@ -6,6 +6,7 @@ from django.urls.base import reverse
 
 from clients.models import Person
 from .models import Question, RADIOBUTTON, CHECKBOX, LINKEDLISTS, Answer, AnswerLL #, AnswerRB, AnswerCB
+from .forms import EditForm
 
 #   questions.views
 
@@ -118,10 +119,11 @@ def index(request):
         questions = questions.filter(clauses['include'])
     elif clauses['exclude']:
         questions = questions.exclude(clauses['exclude'])
-    # questions = Question.with_perms.all(person)
 
     if request.method == 'POST':
-        if request.POST.get("filter"):
+        if request.POST.get("new"):
+            return redirect(reverse("questions:newquestion"))
+        elif request.POST.get("filter"):
             filter.read_form(request)
         elif request.POST.get("default"):
             filter.__setstate__(DEFAULT_FILTER)
@@ -137,6 +139,47 @@ def index(request):
             'questions': questions,
             'questions_filter_block': filter.render_filter_form(request),
         },
+    )
+
+
+@login_required(login_url='login')
+def new_question(request):
+    question = Question()
+    question.name = "о чём вопрос"
+    question.description = "описание задания и текст вопроса"
+    question.division = request.person.division
+    question.owner = request.person
+    question.active = False
+    question.archived = False
+    return form_question(request, question)
+
+
+@login_required(login_url='login')
+def edit_question(request, questionid):
+    question = get_object_or_404(Question.with_perms.all(request.person), pk=questionid)
+    return form_question(request, question)
+
+
+def form_question(request, question):
+    if request.method == 'POST':
+        form = EditForm(request.POST, instance=question)
+        if form.is_valid():
+            if request.POST.get('save'):
+                form.save(commit=True)
+            # elif request.POST.get('del'):   # Удалить не связанные и архивирвоать связанные.
+            #     question.delete()
+            # elif request.POST.get('cancel'):
+                return redirect(reverse("questions:index"))
+    else:
+        form = EditForm(instance=question)
+
+    return render(
+        request,
+        "editquestion.html",
+        {
+            'question': question,
+            'form': form,
+        }
     )
 
 

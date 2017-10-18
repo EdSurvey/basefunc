@@ -28,14 +28,16 @@
             <td>{{question.owner}}</td>
             <td>{{question.division}}</td>
             <td>
-                <a href="{% url 'questions:answersbyquestion' question.id %}">View</a>
+                <a href="{% url 'questions:answersbyquestion' question.id %}">Ответы</a>
                 {% if question.active %}
-                    <a href="./answersbyquestion/{{question.id}}">Edit</a>
-                    <a href="./answersbyquestion/{{question.id}}">Delete</a>
+                    <a href="{% url 'questions:editquestion' question.id %}">Изменить</a>
                 {% endif %}
             </td>
         </tr>
     {% endfor %}
     </table>
+
+    <input type="submit" value="Новый вопрос" name="new">
+
 </form>
 {% endblock %}

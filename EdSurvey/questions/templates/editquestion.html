@@ -1,0 +1,12 @@
+{% extends 'home.htm' %}
+{% block mainblock %}
+
+<form method="post">
+    {{form}}
+    {% csrf_token %}
+    <input type="submit" value="Сохранить" name="save">
+    <input type="submit" value="Удалить" name="del">
+</form>
+
+
+{% endblock %}

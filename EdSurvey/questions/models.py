@@ -33,6 +33,7 @@ class Question(models.Model):
                              verbose_name='Тип вопроса',)
     owner = models.ForeignKey(Person, on_delete=models.PROTECT, verbose_name='личность-владелец')
     active = models.BooleanField('активно', default=True)
+    archived = models.BooleanField('архивный', default=False)
 
     objects = models.Manager()
     with_perms = QuestionManager()
@@ -43,6 +44,15 @@ class Question(models.Model):
 
     def __str__(self):
         return "{}.{}.{}".format(self.id, self.qtype, self.name)
+
+    def __setstate__(self, state):
+        self.name = state['name']
+        self.description = state['description']
+        self.qtype = state['qtype']
+        self.public = state['public']
+        self.active = state['active']
+        self.division = state['division']
+        self.owner = state['owner']
 
 
 def question_pre_save(instance, **kwargs):
