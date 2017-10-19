@@ -21,4 +21,11 @@
     </table>
 {% endblock%}
 
+<form method="post" action="">
+    {{formset.as_p}}
+    {% csrf_token %}
+    <input type="submit" value="Сохранить" name="save">
+    <input type="submit" value="К вопросам" name="cancel">
+</form>
+
 {% endblock%}
