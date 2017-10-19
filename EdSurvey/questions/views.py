@@ -6,7 +6,7 @@ from django.urls.base import reverse
 
 from clients.models import Person
 from .models import Question, RADIOBUTTON, CHECKBOX, LINKEDLISTS, Answer, AnswerLL #, AnswerRB, AnswerCB
-from .forms import EditForm
+from .forms import EditForm, AnswerFormSet, AnswerFormSetLL
 
 #   questions.views
 
@@ -202,17 +202,27 @@ def answers_by_question(request, questionid):
     question = get_object_or_404(Question.with_perms.all(request.person), pk=questionid)
     if question.qtype in [RADIOBUTTON, CHECKBOX]:
         answers = Answer.objects.filter(question=question)
-        return render(
-            request,
-            'answersbyquestion.html',
-            {'question': question,
-             'answers': answers}
-        )
+        formset_class = AnswerFormSet
+        answer_template = 'answersbyquestion.html'
     elif question.qtype in [LINKEDLISTS]:
         answers = AnswerLL.objects.filter(question=question)
-        return render(
-            request,
-            'answersllbyquestion.html',
-            {'question': question,
-             'answers': answers}
-        )
+        formset_class = AnswerFormSetLL
+        answer_template = 'answersllbyquestion.html'
+
+    if request.method == 'POST':
+        formset = formset_class(request.POST, request.FILES)
+        if request.POST.get('save') and formset.is_valid():
+            formset.save()
+        return redirect(reverse("questions:index"))
+    else:
+        formset = formset_class(queryset=answers)
+
+    return render(
+        request,
+        answer_template,
+        {
+            'question': question,
+            'answers': answers,
+            'formset': formset,
+        }
+    )

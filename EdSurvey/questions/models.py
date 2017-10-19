@@ -72,14 +72,15 @@ pre_save.connect(question_pre_save, sender=Question)
 
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.PROTECT)
-    content = models.TextField()
-    ordernum = models.PositiveIntegerField(null=True, blank=True)
-    score = models.PositiveIntegerField(null=True, blank=True)
+    question = models.ForeignKey(Question, on_delete=models.PROTECT, verbose_name='вопрос')
+    content = models.TextField(verbose_name='вариант')
+    ordernum = models.PositiveIntegerField(null=True, blank=True, verbose_name='порядок варианта')
+    score = models.PositiveIntegerField(null=True, blank=True, verbose_name='балл')
     qtype = models.CharField(
         max_length=2,
         choices=QUESTION_TYPE_CHOICES,
         default=RADIOBUTTON,
+        verbose_name = 'тип вопроса',
     )
 
     class Meta:
@@ -139,8 +140,8 @@ class AnswerLL(Answer):
         Answer, on_delete=models.CASCADE,
         parent_link=True,
     )
-    linkeditem = models.TextField()
-    ordernumitem = models.PositiveIntegerField(null=True, blank=True)
+    linkeditem = models.TextField(verbose_name='вариант ответа')
+    ordernumitem = models.PositiveIntegerField(null=True, blank=True, verbose_name='порядок ответа')
 
     class Meta:
         verbose_name = 'Ответ-Путанка'
