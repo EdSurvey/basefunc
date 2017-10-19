@@ -20,7 +20,10 @@
             <th>Действия</th>
         </tr>
     {% for question in questions %}
-        <tr{% if not question.active %} bgcolor="Tan"{% endif %}>
+        <tr
+                {% if not question.active %} bgcolor="Tan"{% endif %}
+                {% if question.archived %} style="color: red" {% endif %}
+        >
             <td>{% if question.public %} Да {% else %} Нет {% endif %}</td>
             <td>{{question.name}}</td>
             <td>{{question.description}}</td>

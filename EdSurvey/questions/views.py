@@ -11,18 +11,18 @@ from .forms import EditForm
 #   questions.views
 
 
-DEFAULT_FILTER = (True, True, False, True, False)
+DEFAULT_FILTER = (True, True, False, True, True, False)
 
 class Filter():
 
     def __init__(self):
-        self.pub = self.own = self.oth = self.act = self.arc = True
+        self.pub = self.own = self.oth = self.act = self.hid = self.arc = True
 
     def __setstate__(self, state):
-        self.pub, self.own, self.oth, self.act, self.arc = state
+        self.pub, self.own, self.oth, self.act, self.hid, self.arc = state
 
     def __getstate__(self):
-        return self.pub, self.own, self.oth, self.act, self.arc
+        return self.pub, self.own, self.oth, self.act, self.hid, self.arc
 
     def read_session(self, request):
         """ Загрузить атрибуты из session """
@@ -35,6 +35,8 @@ class Filter():
             self.oth = request.session['flt_q_oth']
         if 'flt_q_act' in request.session:
             self.act = request.session['flt_q_act']
+        if 'flt_q_hid' in request.session:
+            self.hid = request.session['flt_q_hid']
         if 'flt_q_arc' in request.session:
             self.arc = request.session['flt_q_arc']
 
@@ -44,6 +46,7 @@ class Filter():
         request.session['flt_q_own'] = self.own
         request.session['flt_q_oth'] = self.oth
         request.session['flt_q_act'] = self.act
+        request.session['flt_q_hid'] = self.hid
         request.session['flt_q_arc'] = self.arc
 
     def read_form(self, request):
@@ -65,9 +68,13 @@ class Filter():
         except KeyError:
             self.act = DEFAULT_FILTER[3]
         try:
+            self.hid = request.POST.get('choice_hid') is not None
+        except KeyError:
+            self.hid = DEFAULT_FILTER[4]
+        try:
             self.arc = request.POST.get('choice_arc') is not None
         except KeyError:
-            self.arc = DEFAULT_FILTER[4]
+            self.arc = DEFAULT_FILTER[5]
 
     def render_filter_form(self, request):
         return render_to_string(
@@ -77,12 +84,12 @@ class Filter():
                 'flt_q_own': self.own,
                 'flt_q_oth': self.oth,
                 'flt_q_act': self.act,
+                'flt_q_hid': self.hid,
                 'flt_q_arc': self.arc
             }
         )
 
     def gen_filter_clause(self, request):
-
         def add_in_filt(filt, expr:bool, item:Q):
             if expr:
                 if filt is None:
@@ -97,7 +104,8 @@ class Filter():
         result['exclude'] = add_in_filt(result['exclude'], not self.own, Q(owner=request.person))
         result['include'] = add_in_filt(result['include'], not self.oth, Q(owner=request.person))
         result['exclude'] = add_in_filt(result['exclude'], not self.act, Q(active=True))
-        result['exclude'] = add_in_filt(result['exclude'], not self.arc, Q(active=False))
+        result['exclude'] = add_in_filt(result['exclude'], not self.hid, Q(active=False))
+        result['exclude'] = add_in_filt(result['exclude'], not self.arc, Q(archived=True))
         return result
 
 
