@@ -166,10 +166,16 @@ def form_question(request, question):
         if form.is_valid():
             if request.POST.get('save'):
                 form.save(commit=True)
-            # elif request.POST.get('del'):   # Удалить не связанные и архивирвоать связанные.
-            #     question.delete()
-            # elif request.POST.get('cancel'):
-                return redirect(reverse("questions:index"))
+            elif request.POST.get('del'):   # Удалить не связанные и архивирвоать связанные.
+                if Answer.objects.filter(question=question)[:1].count() == 0:
+                    question.delete()
+                else:
+                    question.archived = True
+                    question.active = False
+                    question.save()
+            elif request.POST.get('cancel'):
+                pass
+            return redirect(reverse("questions:index"))
     else:
         form = EditForm(instance=question)
 

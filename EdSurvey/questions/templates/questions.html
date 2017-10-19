@@ -29,9 +29,7 @@
             <td>{{question.division}}</td>
             <td>
                 <a href="{% url 'questions:answersbyquestion' question.id %}">Ответы</a>
-                {% if question.active %}
-                    <a href="{% url 'questions:editquestion' question.id %}">Изменить</a>
-                {% endif %}
+                <a href="{% url 'questions:editquestion' question.id %}">Изменить</a>
             </td>
         </tr>
     {% endfor %}
