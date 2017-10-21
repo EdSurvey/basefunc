@@ -6,15 +6,16 @@ from django.urls.base import reverse
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.contrib import messages
 
-from .models import Question, RADIOBUTTON, CHECKBOX, LINKEDLISTS, Answer, AnswerLL #, AnswerRB, AnswerCB
-from .forms import EditForm, AnswerFormSet, AnswerFormSetLL, EditAnswerForm, EditAnswerFormLL
+from .models import Question, RADIOBUTTON, CHECKBOX, LINKEDLISTS, Answer, AnswerRB, AnswerCB, AnswerLL
+from .forms import EditForm, EditAnswerForm, EditAnswerFormLL
 
 #   questions.views
 
 
 DEFAULT_FILTER = (True, True, False, True, True, False)
 
-class Filter():
+
+class Filter:
 
     def __init__(self):
         self.pub = self.own = self.oth = self.act = self.hid = self.arc = True
@@ -77,7 +78,7 @@ class Filter():
         except KeyError:
             self.arc = DEFAULT_FILTER[5]
 
-    def render_filter_form(self, request):
+    def render_filter_form(self):
         return render_to_string(
             'questionsfilterblock.html',
             {
@@ -91,7 +92,7 @@ class Filter():
         )
 
     def gen_filter_clause(self, request):
-        def add_in_filt(filt, expr:bool, item:Q):
+        def add_in_filt(filt, expr: bool, item: Q):
             if expr:
                 if filt is None:
                     return item
@@ -100,7 +101,7 @@ class Filter():
             else:
                 return filt
 
-        result = {'include':None, 'exclude':None}
+        result = {'include': None, 'exclude': None}
         result['exclude'] = add_in_filt(result['exclude'], not self.pub, Q(public=True) & Q(owner=request.person))
         result['exclude'] = add_in_filt(result['exclude'], not self.own, Q(owner=request.person))
         result['include'] = add_in_filt(result['include'], not self.oth, Q(owner=request.person))
@@ -117,10 +118,10 @@ def index(request):
     Для всех моих - отображает кнопки [просмотреть],[изменить],[удалить]
     Для чужих public - отображает только кнопку [просмотреть]
     """
-    filter = Filter()
-    filter.read_session(request)
+    filt = Filter()
+    filt.read_session(request)
     person = request.person
-    clauses = filter.gen_filter_clause(request)
+    clauses = filt.gen_filter_clause(request)
     questions = Question.with_perms.all(person)
     if clauses['include'] and clauses['exclude']:
         questions = questions.filter(clauses['include']).exclude(clauses['exclude'])
@@ -133,12 +134,12 @@ def index(request):
         if request.POST.get("new"):
             return redirect(reverse("questions:newquestion"))
         elif request.POST.get("filter"):
-            filter.read_form(request)
+            filt.read_form(request)
         elif request.POST.get("default"):
-            filter.__setstate__(DEFAULT_FILTER)
+            filt.__setstate__(DEFAULT_FILTER)
         elif request.POST.get("set_all"):
-            filter = Filter()
-        filter.write_session(request)
+            filt = Filter()
+        filt.write_session(request)
         return redirect(reverse("questions:index"))
 
     return render(
@@ -146,7 +147,7 @@ def index(request):
         'questions.html',
         {
             'questions': questions,
-            'questions_filter_block': filter.render_filter_form(request),
+            'questions_filter_block': filt.render_filter_form(),
         },
     )
 
@@ -203,7 +204,7 @@ def form_question(request, question):
     if question.qtype in [RADIOBUTTON, CHECKBOX]:
         answers = Answer.objects.filter(question=question).order_by('ordernum')
     elif question.qtype in [LINKEDLISTS]:
-        answers = AnswerLL.objects.filter(question=question).order_by('ordernum','ordernumitem')
+        answers = AnswerLL.objects.filter(question=question).order_by('ordernum', 'ordernumitem')
 
     return render(
         request,
@@ -211,12 +212,12 @@ def form_question(request, question):
         {
             'question': question,
             'form': form,
-            'answersblock': answers_block(request, question, answers),
+            'answersblock': answers_block(question, answers),
         }
     )
 
 
-def answers_block(request, question, answers):
+def answers_block(question, answers):
     return render_to_string(
         'answersblock.html',
         {
@@ -249,8 +250,11 @@ def form_answer(request, answer):
     if answer.qtype == 'LL':
         answer_inst = AnswerLL.objects.get(answer=answer)
         form_class = EditAnswerFormLL
-    else:
-        answer_inst = answer
+    elif answer.qtype == 'RB':
+        answer_inst = AnswerRB.objects.get(answer=answer)
+        form_class = EditAnswerForm
+    elif answer.qtype == 'CB':
+        answer_inst = AnswerCB.objects.get(answer=answer)
         form_class = EditAnswerForm
 
     if request.method == 'POST':
@@ -282,39 +286,5 @@ def form_answer(request, answer):
             'question': answer.question,
             'form': form,
             'answer': answer,
-        }
-    )
-
-
-@login_required(login_url='login')
-def answers_by_question(request, questionid):
-    question = get_object_or_404(Question.with_perms.all(request.person), pk=questionid)
-    if question.qtype in [RADIOBUTTON, CHECKBOX]:
-        answers = Answer.objects.filter(question=question).order_by('ordernum')
-        formset_class = AnswerFormSet
-        answer_template = 'answersbyquestion.html'
-    elif question.qtype in [LINKEDLISTS]:
-        answers = AnswerLL.objects.filter(question=question).order_by('ordernum','ordernumitem')
-        formset_class = AnswerFormSetLL
-        answer_template = 'answersllbyquestion.html'
-
-    if request.method == 'POST':
-        formset = formset_class(request.POST, request.FILES)
-        if request.POST.get('save') and formset.is_valid():
-            try:
-                formset.save()
-            except ValidationError as e:
-                messages.add_message(request, messages.ERROR, e.message)
-        return redirect(reverse("questions:index"))
-    else:
-        formset = formset_class(queryset=answers)
-
-    return render(
-        request,
-        answer_template,
-        {
-            'question': question,
-            'answers': answers,
-            'formset': formset,
         }
     )

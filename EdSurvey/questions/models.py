@@ -16,9 +16,11 @@ QUESTION_TYPE_CHOICES = (
     (LINKEDLISTS, "Путанка"),
 )
 
+
 class QuestionManager(models.Manager):
 
-    def filter_expr(self, person):
+    @staticmethod
+    def filter_expr(person):
         return Q(public=True) | (Q(owner=person) & Q(division=person.division))
 
     def all(self, person):
@@ -64,11 +66,11 @@ def question_pre_save(instance, **kwargs):
     cntRB = AnswerRB.objects.all().filter(question=instance)[:1].count()
     cntCB = AnswerCB.objects.all().filter(question=instance)[:1].count()
     cntLL = AnswerLL.objects.all().filter(question=instance)[:1].count()
-    if instance.qtype not in [qtype for qtype,txt in QUESTION_TYPE_CHOICES]:
+    if instance.qtype not in [qtype for (qtype, txt) in QUESTION_TYPE_CHOICES]:
         raise ValidationError(_("Unknown QType"))
     elif (instance.qtype == RADIOBUTTON and (cntCB + cntLL) > 0) or \
         (instance.qtype == CHECKBOX and (cntRB + cntLL) > 0) or \
-        (instance.qtype == LINKEDLISTS and (cntRB + cntCB) > 0) :
+        (instance.qtype == LINKEDLISTS and (cntRB + cntCB) > 0):
         raise ValidationError("Нельзя изменять тип вопроса, если вопрос всё ещё имеет ответы.")
 
 pre_save.connect(question_pre_save, sender=Question)
