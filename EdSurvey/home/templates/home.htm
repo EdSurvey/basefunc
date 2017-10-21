@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="{% static 'main.css' %}" >
 </head>
 <body>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <div class="page-header">
     <h1><a href="/">Education by Survey</a></h1>
     <h6><i>Самый простой способ получить ответ - задать вопрос.</i></h6>

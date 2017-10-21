@@ -3,7 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.urls.base import reverse
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.contrib import messages
 
 from .models import Question, RADIOBUTTON, CHECKBOX, LINKEDLISTS, Answer, AnswerLL #, AnswerRB, AnswerCB
 from .forms import EditForm, AnswerFormSet, AnswerFormSetLL, EditAnswerForm, EditAnswerFormLL
@@ -173,14 +174,26 @@ def form_question(request, question):
         form = EditForm(request.POST, instance=question)
         if form.is_valid():
             if request.POST.get('save'):
-                form.save(commit=True)
+                try:
+                    form.save(commit=True)
+                except ValidationError as e:
+                    messages.add_message(request, messages.ERROR, e.message)
+                    return redirect(request.path)
             elif request.POST.get('del'):   # Удалить не связанные и архивирвоать связанные.
                 if Answer.objects.filter(question=question)[:1].count() == 0:
-                    question.delete()
+                    try:
+                        question.delete()
+                    except ValidationError as e:
+                        messages.add_message(request, messages.ERROR, e.message)
+                        return redirect(request.path)
                 else:
                     question.archived = True
                     question.active = False
-                    question.save()
+                    try:
+                        question.save()
+                    except ValidationError as e:
+                        messages.add_message(request, messages.ERROR, e.message)
+                        return redirect(request.path)
             elif request.POST.get('cancel'):
                 pass
             return redirect(reverse("questions:index"))
@@ -244,10 +257,18 @@ def form_answer(request, answer):
         form = form_class(request.POST, instance=answer_inst)
         if form.is_valid():
             if request.POST.get('save'):
-                form.save(commit=True)
+                try:
+                    form.save(commit=True)
+                except ValidationError as e:
+                    messages.add_message(request, messages.ERROR, e.message)
+                    return redirect(request.path)
             elif request.POST.get('del'):
                 if not answer.question.archived:
-                    answer.delete()
+                    try:
+                        answer.delete()
+                    except ValidationError as e:
+                        messages.add_message(request, messages.ERROR, e.message)
+                        return redirect(request.path)
             elif request.POST.get('cancel'):
                 pass
             return redirect(reverse("questions:editquestion", args=[answer.question.id]))
@@ -280,7 +301,10 @@ def answers_by_question(request, questionid):
     if request.method == 'POST':
         formset = formset_class(request.POST, request.FILES)
         if request.POST.get('save') and formset.is_valid():
-            formset.save()
+            try:
+                formset.save()
+            except ValidationError as e:
+                messages.add_message(request, messages.ERROR, e.message)
         return redirect(reverse("questions:index"))
     else:
         formset = formset_class(queryset=answers)
