@@ -1,5 +1,7 @@
-{% extends 'answersbyquestion.html' %}
 {% block answersblock %}
+
+<h4>Варианты ответов:</h4>
+{% if question.qtype == "LL" %}
     <table border="1">
         <tr>
             <th align="center">Порядок</th>
@@ -8,7 +10,7 @@
             <th align="center">Вариант</th>
             <th align="center">Оценка</th>
         </tr>
-{% for answer in answers %}
+    {% for answer in answers %}
         <tr>
             <td>{% if answer.ordernum %}{{answer.ordernum}}{% else %}-{% endif %}</td>
             <td>{{answer.content}}</td>
@@ -16,6 +18,24 @@
             <td>{{answer.linkeditem}}</td>
             <td align="center">{{answer.score}}</td>
         </tr>
-{% endfor%}
+    {% endfor%}
     </table>
-{% endblock%}
+
+{% else %}
+    <table border="1">
+        <tr>
+            <th>Порядок</th>
+            <th>Текст ответа</th>
+            <th>Оценка</th>
+        </tr>
+    {% for answer in answers %}
+        <tr>
+            <td>{% if answer.ordernum %}{{answer.ordernum}}{% else %}-{% endif %}</td>
+            <td>{{answer.content}}</td>
+            <td>{{answer.score}}</td>
+        </tr>
+    {% endfor%}
+    </table>
+{% endif %}
+
+{% endblock %}

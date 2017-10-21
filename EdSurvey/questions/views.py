@@ -6,7 +6,7 @@ from django.urls.base import reverse
 
 from clients.models import Person
 from .models import Question, RADIOBUTTON, CHECKBOX, LINKEDLISTS, Answer, AnswerLL #, AnswerRB, AnswerCB
-from .forms import EditForm
+from .forms import EditForm, AnswerFormSet, AnswerFormSetLL, EditAnswerForm, EditAnswerFormLL
 
 #   questions.views
 
@@ -186,6 +186,11 @@ def form_question(request, question):
             return redirect(reverse("questions:index"))
     else:
         form = EditForm(instance=question)
+    # Get answers of the question.
+    if question.qtype in [RADIOBUTTON, CHECKBOX]:
+        answers = Answer.objects.filter(question=question).order_by('ordernum')
+    elif question.qtype in [LINKEDLISTS]:
+        answers = AnswerLL.objects.filter(question=question).order_by('ordernum','ordernumitem')
 
     return render(
         request,
@@ -193,6 +198,17 @@ def form_question(request, question):
         {
             'question': question,
             'form': form,
+            'answersblock': answers_block(request, question, answers),
+        }
+    )
+
+
+def answers_block(request, question, answers):
+    return render_to_string(
+        'answersblock.html',
+        {
+            'question': question,
+            'answers': answers,
         }
     )
 
@@ -201,18 +217,66 @@ def form_question(request, question):
 def answers_by_question(request, questionid):
     question = get_object_or_404(Question.with_perms.all(request.person), pk=questionid)
     if question.qtype in [RADIOBUTTON, CHECKBOX]:
-        answers = Answer.objects.filter(question=question)
-        return render(
-            request,
-            'answersbyquestion.html',
-            {'question': question,
-             'answers': answers}
-        )
+        answers = Answer.objects.filter(question=question).order_by('ordernum')
+        formset_class = AnswerFormSet
+        answer_template = 'answersbyquestion.html'
     elif question.qtype in [LINKEDLISTS]:
-        answers = AnswerLL.objects.filter(question=question)
-        return render(
-            request,
-            'answersllbyquestion.html',
-            {'question': question,
-             'answers': answers}
-        )
+        answers = AnswerLL.objects.filter(question=question).order_by('ordernum','ordernumitem')
+        formset_class = AnswerFormSetLL
+        answer_template = 'answersllbyquestion.html'
+
+    if request.method == 'POST':
+        formset = formset_class(request.POST, request.FILES)
+        if request.POST.get('save') and formset.is_valid():
+            formset.save()
+        return redirect(reverse("questions:index"))
+    else:
+        formset = formset_class(queryset=answers)
+
+    return render(
+        request,
+        answer_template,
+        {
+            'question': question,
+            'answers': answers,
+            'formset': formset,
+        }
+    )
+
+
+@login_required(login_url='login')
+def new_answer(request):
+    answer = Answer()
+    # TODO: значения по-умолчанию или шаблон/пример
+    return form_answer(request, answer)
+
+
+@login_required(login_url='login')
+def edit_answer(request, answerid):
+    answer = get_object_or_404(Answer.with_perms.all(request.person), pk=answerid)
+    return form_answer(request, answer)
+
+
+def form_answer(request, answer):
+    if request.method == 'POST':
+        form = EditAnswerForm(request.POST, instance=answer)
+        if form.is_valid():
+            if request.POST.get('save'):
+                form.save(commit=True)
+            elif request.POST.get('del'):   # Удалить не связанные и архивирвоать связанные.
+                answer.delete()
+            elif request.POST.get('cancel'):
+                pass
+            return redirect(reverse("questions:answerbyquestion", args=(answer.id)))
+    else:
+        form = EditAnswerForm(instance=answer)
+
+    return render(
+        request,
+        "editanswer.html",
+        {
+            'question': answer.question,
+            'form': form,
+            'answer': answer,
+        }
+    )

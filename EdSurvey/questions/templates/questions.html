@@ -12,12 +12,11 @@
     <table border="1">
         <tr bgcolor="#FFA500">
             <th>Public</th>
-            <th>Название</th>
+            <th>Заголовок</th>
             <th>Текст</th>
-            <th>Тип</th>
+            <th>Тип вопроса</th>
             <th>Владелец</th>
             <th>Организация</th>
-            <th>Действия</th>
         </tr>
     {% for question in questions %}
         <tr
@@ -25,15 +24,11 @@
                 {% if question.archived %} style="color: red" {% endif %}
         >
             <td>{% if question.public %} Да {% else %} Нет {% endif %}</td>
-            <td>{{question.name}}</td>
+            <td><a href="{% url 'questions:editquestion' question.id %}">{{question.name}}</a></td>
             <td>{{question.description}}</td>
-            <td>{{question.get_qtype_display}}</td>
+            <td><a href="{% url 'questions:answersbyquestion' question.id %}">{{question.get_qtype_display}}</a></td>
             <td>{{question.owner}}</td>
             <td>{{question.division}}</td>
-            <td>
-                <a href="{% url 'questions:answersbyquestion' question.id %}">Ответы</a>
-                <a href="{% url 'questions:editquestion' question.id %}">Изменить</a>
-            </td>
         </tr>
     {% endfor %}
     </table>
