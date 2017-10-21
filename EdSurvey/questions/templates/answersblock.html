@@ -3,7 +3,7 @@
 <h4>Варианты ответов:</h4>
 {% if question.qtype == "LL" %}
     <table border="1">
-        <tr>
+        <tr bgcolor="#FFA500">
             <th align="center">Порядок</th>
             <th align="center">Вопрос</th>
             <th align="center">Порядок вариантов</th>
@@ -13,7 +13,7 @@
     {% for answer in answers %}
         <tr>
             <td>{% if answer.ordernum %}{{answer.ordernum}}{% else %}-{% endif %}</td>
-            <td>{{answer.content}}</td>
+            <td><a href="{% url 'questions:editanswer' answer.id %}">{{answer.content}}</a></td>
             <td align="center">{% if answer.ordernumitem %}{{answer.ordernumitem}}{% else %}-{% endif %}</td>
             <td>{{answer.linkeditem}}</td>
             <td align="center">{{answer.score}}</td>
@@ -23,7 +23,7 @@
 
 {% else %}
     <table border="1">
-        <tr>
+        <tr bgcolor="#FFA500">
             <th>Порядок</th>
             <th>Текст ответа</th>
             <th>Оценка</th>
@@ -31,7 +31,7 @@
     {% for answer in answers %}
         <tr>
             <td>{% if answer.ordernum %}{{answer.ordernum}}{% else %}-{% endif %}</td>
-            <td>{{answer.content}}</td>
+            <td><a href="{% url 'questions:editanswer' answer.id %}">{{answer.content}}</a></td>
             <td>{{answer.score}}</td>
         </tr>
     {% endfor%}

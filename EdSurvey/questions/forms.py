@@ -32,10 +32,12 @@ AnswerFormSetLL = modelformset_factory(
 class EditAnswerForm(ModelForm):
     class Meta:
         model = Answer
-        fields = '__all__'  # TODO: fields = ['name', 'description', 'qtype', 'public', 'active', 'archived', 'division', 'owner']
+        # fields = '__all__'
+        fields = ['content', 'ordernum', 'score']
 
 
 class EditAnswerFormLL(ModelForm):
     class Meta:
         model = AnswerLL
-        fields = '__all__'  # TODO: fields = ['name', 'description', 'qtype', 'public', 'active', 'archived', 'division', 'owner']
+        fields = ['content', 'ordernum', 'score', 'linkeditem', 'ordernumitem',]
+

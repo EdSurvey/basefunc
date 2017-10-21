@@ -3,8 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.urls.base import reverse
+from django.core.exceptions import ObjectDoesNotExist
 
-from clients.models import Person
 from .models import Question, RADIOBUTTON, CHECKBOX, LINKEDLISTS, Answer, AnswerLL #, AnswerRB, AnswerCB
 from .forms import EditForm, AnswerFormSet, AnswerFormSetLL, EditAnswerForm, EditAnswerFormLL
 
@@ -214,6 +214,58 @@ def answers_block(request, question, answers):
 
 
 @login_required(login_url='login')
+def new_answer(request, questionid):
+    question = get_object_or_404(Question.with_perms.all(request.person), pk=questionid)
+    answer = Answer()
+    answer.question = question
+    answer.qtype = question.qtype
+    answer.content = "новое содержание"
+    return form_answer(request, answer)
+
+
+@login_required(login_url='login')
+def edit_answer(request, answerid):
+    answer = get_object_or_404(Answer, pk=answerid)
+    if answer.check_perm(request.person):
+        return form_answer(request, answer)
+    else:
+        raise ObjectDoesNotExist
+
+
+def form_answer(request, answer):
+    if answer.qtype == 'LL':
+        answer_inst = AnswerLL.objects.get(answer=answer)
+        form_class = EditAnswerFormLL
+    else:
+        answer_inst = answer
+        form_class = EditAnswerForm
+
+    if request.method == 'POST':
+        form = form_class(request.POST, instance=answer_inst)
+        if form.is_valid():
+            if request.POST.get('save'):
+                form.save(commit=True)
+            elif request.POST.get('del'):
+                if not answer.question.archived:
+                    answer.delete()
+            elif request.POST.get('cancel'):
+                pass
+            return redirect(reverse("questions:editquestion", args=[answer.question.id]))
+    else:
+        form = form_class(instance=answer_inst)
+
+    return render(
+        request,
+        "editanswer.html",
+        {
+            'question': answer.question,
+            'form': form,
+            'answer': answer,
+        }
+    )
+
+
+@login_required(login_url='login')
 def answers_by_question(request, questionid):
     question = get_object_or_404(Question.with_perms.all(request.person), pk=questionid)
     if question.qtype in [RADIOBUTTON, CHECKBOX]:
@@ -240,43 +292,5 @@ def answers_by_question(request, questionid):
             'question': question,
             'answers': answers,
             'formset': formset,
-        }
-    )
-
-
-@login_required(login_url='login')
-def new_answer(request):
-    answer = Answer()
-    # TODO: значения по-умолчанию или шаблон/пример
-    return form_answer(request, answer)
-
-
-@login_required(login_url='login')
-def edit_answer(request, answerid):
-    answer = get_object_or_404(Answer.with_perms.all(request.person), pk=answerid)
-    return form_answer(request, answer)
-
-
-def form_answer(request, answer):
-    if request.method == 'POST':
-        form = EditAnswerForm(request.POST, instance=answer)
-        if form.is_valid():
-            if request.POST.get('save'):
-                form.save(commit=True)
-            elif request.POST.get('del'):   # Удалить не связанные и архивирвоать связанные.
-                answer.delete()
-            elif request.POST.get('cancel'):
-                pass
-            return redirect(reverse("questions:answerbyquestion", args=(answer.id)))
-    else:
-        form = EditAnswerForm(instance=answer)
-
-    return render(
-        request,
-        "editanswer.html",
-        {
-            'question': answer.question,
-            'form': form,
-            'answer': answer,
         }
     )

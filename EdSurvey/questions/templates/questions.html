@@ -24,9 +24,9 @@
                 {% if question.archived %} style="color: red" {% endif %}
         >
             <td>{% if question.public %} Да {% else %} Нет {% endif %}</td>
-            <td><a href="{% url 'questions:editquestion' question.id %}">{{question.name}}</a></td>
+            <td><a href="{% url 'questions:editquestion' question.id %}">{{question.name}} >></a></td>
             <td>{{question.description}}</td>
-            <td><a href="{% url 'questions:answersbyquestion' question.id %}">{{question.get_qtype_display}}</a></td>
+            <td>{{question.get_qtype_display}}</td>
             <td>{{question.owner}}</td>
             <td>{{question.division}}</td>
         </tr>

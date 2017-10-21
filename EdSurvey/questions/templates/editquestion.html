@@ -4,14 +4,17 @@
 <form method="post">
     {{form.as_p}}
     {% csrf_token %}
-    <input type="submit" value="Сохранить" name="save">
-    <input type="submit" value="Удалить" name="del">
-    <input type="submit" value="К вопросам" name="cancel">
+    <div>
+        <input type="submit" value="Сохранить" name="save">
+        <input type="submit" value="Удалить" name="del">
+        <input type="submit" value="К вопросам" name="cancel">
+    </div>
 </form>
 
     {% block answersblock %}
         {{answersblock}}
     {% endblock%}
+    <a href="{% url 'questions:newanswer' question.id %}"> Добавить вариант >> </a>
 
 
 {% endblock %}

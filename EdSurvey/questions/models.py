@@ -17,9 +17,12 @@ QUESTION_TYPE_CHOICES = (
 )
 
 class QuestionManager(models.Manager):
+
+    def filter_expr(self, person):
+        return Q(public=True) | (Q(owner=person) & Q(division=person.division))
+
     def all(self, person):
-        qset = Q(public=True) | (Q(owner=person) & Q(division=person.division))
-        return super().get_queryset().filter(qset)
+        return super().get_queryset().filter(self.filter_expr(person))
 
 
 class Question(models.Model):
@@ -88,6 +91,9 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.content
+
+    def check_perm(self, person):
+        return Question.with_perms.all(person).filter(pk=self.question.id)[:1].count() == 1
 
 
 def answer_pre_save(instance, **kwargs):
