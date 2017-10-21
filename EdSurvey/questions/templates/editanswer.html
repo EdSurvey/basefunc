@@ -4,11 +4,9 @@
 <form method="post">
     {{form.as_p}}
     {% csrf_token %}
-    <input type="submit" value="<< Предыдущий" name="prevanswer">
     <input type="submit" value="Сохранить" name="save">
     <input type="submit" value="Удалить" name="del">
     <input type="submit" value="К вопросу" name="cancel">
-    <input type="submit" value="Следующий >>" name="nextanswer">
 </form>
 
 
