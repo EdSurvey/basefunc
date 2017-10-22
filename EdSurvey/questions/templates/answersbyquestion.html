@@ -1,0 +1,31 @@
+{% extends 'home.htm' %}
+{% block mainblock %}
+<h3>Вопрос: {{question.name}}</h3>
+<h4>Задание: {{question.description}}</h4>
+
+{% block answersblock %}
+<h4>Варианты ответов:</h4>
+    <table border="1">
+        <tr>
+            <th>Порядок</th>
+            <th>Текст ответа</th>
+            <th>Оценка</th>
+        </tr>
+{% for answer in answers %}
+        <tr>
+            <td>{% if answer.ordernum %}{{answer.ordernum}}{% else %}-{% endif %}</td>
+            <td>{{answer.content}}</td>
+            <td>{{answer.score}}</td>
+        </tr>
+{% endfor%}
+    </table>
+{% endblock%}
+
+<form method="post" action="">
+    {{formset.as_p}}
+    {% csrf_token %}
+    <input type="submit" value="Сохранить" name="save">
+    <input type="submit" value="К вопросам" name="cancel">
+</form>
+
+{% endblock%}

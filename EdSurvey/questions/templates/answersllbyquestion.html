@@ -1,0 +1,21 @@
+{% extends 'answersbyquestion.html' %}
+{% block answersblock %}
+    <table border="1">
+        <tr>
+            <th align="center">Порядок</th>
+            <th align="center">Вопрос</th>
+            <th align="center">Порядок вариантов</th>
+            <th align="center">Вариант</th>
+            <th align="center">Оценка</th>
+        </tr>
+{% for answer in answers %}
+        <tr>
+            <td>{% if answer.ordernum %}{{answer.ordernum}}{% else %}-{% endif %}</td>
+            <td>{{answer.content}}</td>
+            <td align="center">{% if answer.ordernumitem %}{{answer.ordernumitem}}{% else %}-{% endif %}</td>
+            <td>{{answer.linkeditem}}</td>
+            <td align="center">{{answer.score}}</td>
+        </tr>
+{% endfor%}
+    </table>
+{% endblock%}

@@ -1,0 +1,22 @@
+{% extends 'home.htm' %}
+{% block mainblock %}
+
+<h2>Вопрос:</h2>
+
+<form method="post">
+    {{form.as_p}}
+    {% csrf_token %}
+    <div>
+        <input type="submit" value="Сохранить" name="save" {% if readonly %}disabled{% endif %}>
+        <input type="submit" value="Удалить" name="del" {% if readonly %}disabled{% endif %}>
+        <input type="submit" value="К вопросам" name="cancel">
+    </div>
+</form>
+
+    {% block answersblock %}
+        {{answersblock}}
+    {% endblock%}
+    {% if question.id and not readonly %}<a href="{% url 'questions:newanswer' question.id %}"> Добавить вариант >> </a>{% endif %}
+    <br>
+
+{% endblock %}

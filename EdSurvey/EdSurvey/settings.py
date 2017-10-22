@@ -26,7 +26,7 @@ SECRET_KEY = 'q@$$c#9w!rd05kz_%umvg04wxv%qp^(c_cpd*(u5o_wb$_vmnk'
 DEBUG = True
 #ALLOWED_HOSTS = []
 #DEBUG = False
-ALLOWED_HOSTS = ['localhost','grestas.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', 'grestas.pythonanywhere.com', 'debvbox.gsihome.loc']
 
 
 # Application definition
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'clients.apps.ClientsConfig',
-    # 'questions.apps.QuestionsConfig',
+    'questions.apps.QuestionsConfig',
     # 'querylists.apps.QuerylistsConfig',
     # 'schedules.apps.SchedulesConfig',
     # 'surveys.apps.SurveysConfig',

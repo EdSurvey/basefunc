@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 
+#   setup.home.install
+
 # Создать ключевых пользователей и группы
 user_site1 = User.objects.create_user(
     username = 'site1',

@@ -13,7 +13,7 @@
             <input type="radio" name="choice" id="choice{{iperson.id}}" value="{{iperson.id}}"
                    {% if iperson.id == person.id %} checked {% endif %}
             />
-            <label for="choice{{iperson.id}}">{{iperson.shortname}}</label> <i>(в {{iperson.division}} с ролью {{iperson.role}})</i>
+            <label for="choice{{iperson.id}}">{{iperson.shortname}}</label> <i>(в {{iperson.division}})</i>
         </td></tr>
     {% endfor %}
         </table>

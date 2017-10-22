@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.timezone import now
 from django.db import models
 
+#   clients.models
 
 class Client(models.Model):
     name = models.CharField('название', max_length=60)
