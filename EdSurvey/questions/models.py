@@ -35,7 +35,8 @@ class Question(models.Model):
     qtype = models.CharField(max_length=2,
                              choices=QUESTION_TYPE_CHOICES,
                              default=RADIOBUTTON,
-                             verbose_name='Тип вопроса',)
+                             verbose_name='Тип вопроса',
+                             blank=True)
     owner = models.ForeignKey(Person, on_delete=models.PROTECT, verbose_name='личность-владелец')
     active = models.BooleanField('активно', default=True)
     archived = models.BooleanField('архивный', default=False)
@@ -159,3 +160,12 @@ class AnswerLL(Answer):
         qtype = self.question.qtype
         if qtype != 'LL':
             raise ValidationError("Тип вопроса ({}) и тип ответа (LL) не совпадают.".format(qtype))
+
+
+def get_answer_class(qtype):
+    if qtype == 'LL':
+        return AnswerLL
+    elif qtype == 'RB':
+        return AnswerRB
+    elif qtype == 'CB':
+        return AnswerCB

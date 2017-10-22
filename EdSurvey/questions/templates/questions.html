@@ -1,6 +1,6 @@
 {% extends 'home.htm' %}
 {% block mainblock %}
-    <h2>Вопросы</h2>
+    <h1>Вопросы</h1>
 
 <form action="{% url 'questions:index' %}" method="post">
     {% csrf_token %}

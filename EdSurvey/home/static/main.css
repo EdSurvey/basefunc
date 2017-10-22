@@ -4,6 +4,12 @@
     padding: 20px 20px 20px 40px;
 }
 
+.page-footer {
+    background-color: #ff9400;
+    margin-bottom: 20px;
+}
+
+
 .page-footer h1, .page-footer h1 a, .page-footer h1 a:visited, .page-footer h1 a:active {
     color: #ffffff;
     font-size: 36pt;

@@ -6,13 +6,17 @@ from django.urls.base import reverse
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.contrib import messages
 
-from .models import Question, RADIOBUTTON, CHECKBOX, LINKEDLISTS, Answer, AnswerRB, AnswerCB, AnswerLL
-from .forms import EditForm, EditAnswerForm, EditAnswerFormLL
+from .models import Question, RADIOBUTTON, CHECKBOX, LINKEDLISTS, Answer, AnswerRB, AnswerCB, AnswerLL, get_answer_class
+from .forms import EditQuestionForm, EditAnswerForm, EditAnswerFormLL
 
 #   questions.views
 
 
 DEFAULT_FILTER = (True, True, False, True, True, False)
+
+
+def is_readonly(request, question):
+    return not question.owner == request.person
 
 
 class Filter:
@@ -171,8 +175,21 @@ def edit_question(request, questionid):
 
 
 def form_question(request, question):
+    readonly = is_readonly(request, question)
+
+    # Get answers of the question.
+    answers = None
+    if question.id:
+        if question.qtype in [RADIOBUTTON, CHECKBOX]:
+            answers = Answer.objects.filter(question=question).order_by('ordernum')
+        elif question.qtype in [LINKEDLISTS]:
+            answers = AnswerLL.objects.filter(question=question).order_by('ordernum', 'ordernumitem')
+    has_answers = answers and len(answers) > 0
+
     if request.method == 'POST':
-        form = EditForm(request.POST, instance=question)
+        if request.POST.get('cancel'):
+            return redirect(reverse("questions:index"))
+        form = EditQuestionForm(request.POST, instance=question, readonly=readonly, answers=has_answers)
         if form.is_valid():
             if request.POST.get('save'):
                 try:
@@ -181,7 +198,7 @@ def form_question(request, question):
                     messages.add_message(request, messages.ERROR, e.message)
                     return redirect(request.path)
             elif request.POST.get('del'):   # Удалить не связанные и архивирвоать связанные.
-                if Answer.objects.filter(question=question)[:1].count() == 0:
+                if answers[:1].count() == 0:
                     try:
                         question.delete()
                     except ValidationError as e:
@@ -195,16 +212,9 @@ def form_question(request, question):
                     except ValidationError as e:
                         messages.add_message(request, messages.ERROR, e.message)
                         return redirect(request.path)
-            elif request.POST.get('cancel'):
-                pass
             return redirect(reverse("questions:index"))
     else:
-        form = EditForm(instance=question)
-    # Get answers of the question.
-    if question.qtype in [RADIOBUTTON, CHECKBOX]:
-        answers = Answer.objects.filter(question=question).order_by('ordernum')
-    elif question.qtype in [LINKEDLISTS]:
-        answers = AnswerLL.objects.filter(question=question).order_by('ordernum', 'ordernumitem')
+        form = EditQuestionForm(instance=question, readonly=readonly, answers=has_answers)
 
     return render(
         request,
@@ -213,24 +223,28 @@ def form_question(request, question):
             'question': question,
             'form': form,
             'answersblock': answers_block(question, answers),
+            'readonly': readonly,
         }
     )
 
 
 def answers_block(question, answers):
-    return render_to_string(
-        'answersblock.html',
-        {
-            'question': question,
-            'answers': answers,
-        }
-    )
+    if question.id:
+        return render_to_string(
+            'answersblock.html',
+            {
+                'question': question,
+                'answers': answers,
+            }
+        )
+    else:
+        return ''
 
 
 @login_required(login_url='login')
 def new_answer(request, questionid):
     question = get_object_or_404(Question.with_perms.all(request.person), pk=questionid)
-    answer = Answer()
+    answer = get_answer_class(question.qtype)()
     answer.question = question
     answer.qtype = question.qtype
     answer.content = "новое содержание"
@@ -241,24 +255,28 @@ def new_answer(request, questionid):
 def edit_answer(request, answerid):
     answer = get_object_or_404(Answer, pk=answerid)
     if answer.check_perm(request.person):
-        return form_answer(request, answer)
+        return form_answer(request, get_answer_class(answer.qtype).objects.get(answer=answer))
     else:
         raise ObjectDoesNotExist
 
 
 def form_answer(request, answer):
+    readonly = is_readonly(request, answer.question)
+
     if answer.qtype == 'LL':
-        answer_inst = AnswerLL.objects.get(answer=answer)
+        # answer_inst = AnswerLL.objects.get(answer=answer)
         form_class = EditAnswerFormLL
     elif answer.qtype == 'RB':
-        answer_inst = AnswerRB.objects.get(answer=answer)
+        # answer_inst = AnswerRB.objects.get(answer=answer)
         form_class = EditAnswerForm
     elif answer.qtype == 'CB':
-        answer_inst = AnswerCB.objects.get(answer=answer)
+        # answer_inst = AnswerCB.objects.get(answer=answer)
         form_class = EditAnswerForm
 
     if request.method == 'POST':
-        form = form_class(request.POST, instance=answer_inst)
+        if request.POST.get('cancel'):
+            return redirect(reverse("questions:editquestion", args=[answer.question.id]))
+        form = form_class(request.POST, instance=answer)
         if form.is_valid():
             if request.POST.get('save'):
                 try:
@@ -273,11 +291,12 @@ def form_answer(request, answer):
                     except ValidationError as e:
                         messages.add_message(request, messages.ERROR, e.message)
                         return redirect(request.path)
-            elif request.POST.get('cancel'):
-                pass
             return redirect(reverse("questions:editquestion", args=[answer.question.id]))
     else:
-        form = form_class(instance=answer_inst)
+        form = form_class(instance=answer)
+        if readonly:
+            for field in form.fields:
+                form.fields[field].widget.attrs['disabled'] = 'disabled'
 
     return render(
         request,
@@ -286,5 +305,6 @@ def form_answer(request, answer):
             'question': answer.question,
             'form': form,
             'answer': answer,
+            'readonly': readonly,
         }
     )
