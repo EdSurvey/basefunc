@@ -17,6 +17,5 @@
         {{answersblock}}
     {% endblock%}
     {% if question.id and not readonly %}<a href="{% url 'questions:newanswer' question.id %}"> Добавить вариант >> </a>{% endif %}
-    <br>
 
 {% endblock %}
