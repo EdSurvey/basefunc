@@ -9,7 +9,7 @@
     {{form.as_p}}
     {% csrf_token %}
     <input type="submit" value="Сохранить" name="save" {% if readonly %}disabled{% endif %}>
-    <input type="submit" value="Удалить" name="del" {% if readonly %}disabled{% endif %}>
+    <input type="submit" value="Удалить" name="del" {% if not answer.id or readonly %}disabled{% endif %}>
     <input type="submit" value="К вопросу" name="cancel">
 </form>
 

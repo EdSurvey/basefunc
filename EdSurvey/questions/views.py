@@ -198,13 +198,7 @@ def form_question(request, question):
                     messages.add_message(request, messages.ERROR, e.message)
                     return redirect(request.path)
             elif request.POST.get('del'):   # Удалить не связанные и архивирвоать связанные.
-                if answers[:1].count() == 0:
-                    try:
-                        question.delete()
-                    except ValidationError as e:
-                        messages.add_message(request, messages.ERROR, e.message)
-                        return redirect(request.path)
-                else:
+                if has_answers:
                     question.archived = True
                     question.active = False
                     try:
@@ -212,6 +206,13 @@ def form_question(request, question):
                     except ValidationError as e:
                         messages.add_message(request, messages.ERROR, e.message)
                         return redirect(request.path)
+                else:
+                    try:
+                        question.delete()
+                    except ValidationError as e:
+                        messages.add_message(request, messages.ERROR, e.message)
+                        return redirect(request.path)
+
             return redirect(reverse("questions:index"))
     else:
         form = EditQuestionForm(instance=question, readonly=readonly, answers=has_answers)
