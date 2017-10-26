@@ -31,14 +31,14 @@ class Question(models.Model):
     name = models.CharField('наименование', max_length=60)
     description = models.TextField('полное описание')
     division = models.ForeignKey(Division, on_delete=models.PROTECT, verbose_name='организация')
-    public = models.BooleanField('публичное', default=False)
+    public = models.BooleanField('публичный', default=False)
     qtype = models.CharField(max_length=2,
                              choices=QUESTION_TYPE_CHOICES,
                              default=RADIOBUTTON,
                              verbose_name='Тип вопроса',
                              blank=True)
     owner = models.ForeignKey(Person, on_delete=models.PROTECT, verbose_name='личность-владелец')
-    active = models.BooleanField('активно', default=True)
+    active = models.BooleanField('активный', default=True)
     archived = models.BooleanField('архивный', default=False)
 
     objects = models.Manager()
@@ -78,7 +78,7 @@ pre_save.connect(question_pre_save, sender=Question)
 
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.PROTECT, verbose_name='вопрос')
+    question = models.ForeignKey(Question, on_delete=models.PROTECT, verbose_name='вариант')
     content = models.TextField(verbose_name='вариант')
     ordernum = models.PositiveIntegerField(null=True, blank=True, verbose_name='порядок варианта')
     score = models.PositiveIntegerField(null=True, blank=True, verbose_name='балл')
@@ -90,8 +90,8 @@ class Answer(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Простой Ответ'
-        verbose_name_plural = 'Простые Ответы'
+        verbose_name = 'Простой вариант'
+        verbose_name_plural = 'Простые варианты'
 
     def __str__(self):
         return self.content
@@ -116,8 +116,8 @@ class AnswerRB(Answer):
     )
 
     class Meta:
-        verbose_name = 'Одиночный Ответ (RadioButton)'
-        verbose_name_plural = 'Одиночные Ответы (RadioButton)'
+        verbose_name = 'Одиночный вариант (RadioButton)'
+        verbose_name_plural = 'Одиночные варианты (RadioButton)'
 
     def clean(self):
         qtype = self.question.qtype
@@ -135,8 +135,8 @@ class AnswerCB(Answer):
     )
 
     class Meta:
-        verbose_name = 'Множественный Ответ (CheckBox)'
-        verbose_name_plural = 'Множественные Ответы (CheckBox)'
+        verbose_name = 'Множественный вариант (CheckBox)'
+        verbose_name_plural = 'Множественные варианты (CheckBox)'
 
     def clean(self):
         qtype = self.question.qtype
@@ -149,7 +149,7 @@ class AnswerLL(Answer):
         Answer, on_delete=models.CASCADE,
         parent_link=True,
     )
-    linkeditem = models.TextField(verbose_name='вариант ответа')
+    linkeditem = models.TextField(verbose_name='ответ')
     ordernumitem = models.PositiveIntegerField(null=True, blank=True, verbose_name='порядок ответа')
 
     class Meta:
