@@ -99,6 +99,19 @@ class Answer(models.Model):
     def check_perm(self, person):
         return Question.with_perms.all(person).filter(pk=self.question.id)[:1].count() == 1
 
+    def __getstate__(self):
+        return {
+            'content': self.content,
+            'ordernum': self.ordernum,
+            'score': self.score,
+            'qtype': self.qtype,
+        }
+
+    def __setstate__(self, state):
+        self.content, self.ordernum, self.score, self.qtype = \
+            state['content'], state['ordernum'], state['score'], state['qtype']
+
+
 
 def answer_pre_save(instance, **kwargs):
     instance.qtype = instance.question.qtype
@@ -161,6 +174,16 @@ class AnswerLL(Answer):
         if qtype != 'LL':
             raise ValidationError("Тип вопроса ({}) и тип ответа (LL) не совпадают.".format(qtype))
 
+    def __getstate__(self):
+        result = super().__getstate__()
+        result['linkeditem'] = self.linkeditem
+        result['ordernumitem'] = self.ordernumitem
+        return result
+
+    def __setstate__(self, state):
+        self.linkeditem, self.ordernumitem = \
+            state['linkeditem'], state['ordernumitem']
+
 
 def get_answer_class(qtype):
     if qtype == 'LL':
@@ -169,3 +192,21 @@ def get_answer_class(qtype):
         return AnswerRB
     elif qtype == 'CB':
         return AnswerCB
+
+
+def copy_answers(source, target):
+    """ Copy answers of source Question to target Question
+
+    :param source: saved Question
+    :param target: sqved Question
+    :return:
+    """
+    answer_class = get_answer_class(source.qtype)
+    for source_answer in answer_class.objects.filter(question=source):
+        # Create new instance of Answer*
+        target_answer = answer_class()
+        # Link create new instance of Answer* to target Question
+        target_answer.question = target
+        # Copy source attribute values into target ones
+        target_answer.__setstate__(source_answer.__getstate__())
+        target_answer.save()
