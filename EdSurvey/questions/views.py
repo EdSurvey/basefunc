@@ -175,6 +175,10 @@ def edit_question(request, questionid):
 
 
 def form_question(request, question):
+    """ Форма редактирования/просмотра Вопроса.
+
+    Вызывается при создании нового и редактирования существующего Вопроса.
+    """
     readonly = is_readonly(request, question)
 
     # Get answers of the question.
@@ -189,6 +193,17 @@ def form_question(request, question):
     if request.method == 'POST':
         if request.POST.get('cancel'):
             return redirect(reverse("questions:index"))
+        if request.POST.get('copy') and not question.owner == request.person:   # Чужой вопрос создаём из записи в БД
+            copy_question = Question.objects.create(
+                name=question.name,
+                description=question.description,
+                qtype=question.qtype,
+                division=request.person.division,
+                owner=request.person,
+                active=False,
+                archived=False,
+            )
+            return redirect(reverse("questions:index"))
         form = EditQuestionForm(request.POST, instance=question, readonly=readonly, answers=has_answers)
         if form.is_valid():
             if request.POST.get('save'):
@@ -197,6 +212,18 @@ def form_question(request, question):
                 except ValidationError as e:
                     messages.add_message(request, messages.ERROR, e.message)
                     return redirect(request.path)
+            elif request.POST.get('copy'):   # Создать новый как копию текущего без сохранения изменений текущего.
+                if __name__ == '__main__':
+                    if question.owner == request.person:    # Свой вопрос создаём из формы
+                        copy_question = Question.objects.create(
+                            name=form.cleaned_data['name'],
+                            description=form.cleaned_data['description'],
+                            qtype=form.cleaned_data['qtype'],
+                            division=request.person.division,
+                            owner=request.person,
+                            active = False,
+                            archived = False,
+                        )
             elif request.POST.get('del'):   # Удалить не связанные и архивирвоать связанные.
                 if has_answers:
                     question.archived = True
