@@ -6,7 +6,7 @@ from django.urls.base import reverse
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.contrib import messages
 
-from .models import Question, RADIOBUTTON, CHECKBOX, LINKEDLISTS, Answer, AnswerRB, AnswerCB, AnswerLL, get_answer_class
+from .models import Question, RADIOBUTTON, CHECKBOX, LINKEDLISTS, Answer, AnswerRB, AnswerCB, AnswerLL, get_answer_class, copy_answers
 from .forms import EditQuestionForm, EditAnswerForm, EditAnswerFormLL
 
 #   questions.views
@@ -195,7 +195,7 @@ def form_question(request, question):
             return redirect(reverse("questions:index"))
         if request.POST.get('copy') and not question.owner == request.person:   # Чужой вопрос создаём из записи в БД
             copy_question = Question.objects.create(
-                name=question.name,
+                name='(new)' + question.name,
                 description=question.description,
                 qtype=question.qtype,
                 division=request.person.division,
@@ -203,6 +203,8 @@ def form_question(request, question):
                 active=False,
                 archived=False,
             )
+            if has_answers:
+                copy_answers(source=question, target=copy_question)
             return redirect(reverse("questions:index"))
         form = EditQuestionForm(request.POST, instance=question, readonly=readonly, answers=has_answers)
         if form.is_valid():
@@ -213,17 +215,18 @@ def form_question(request, question):
                     messages.add_message(request, messages.ERROR, e.message)
                     return redirect(request.path)
             elif request.POST.get('copy'):   # Создать новый как копию текущего без сохранения изменений текущего.
-                if __name__ == '__main__':
-                    if question.owner == request.person:    # Свой вопрос создаём из формы
-                        copy_question = Question.objects.create(
-                            name=form.cleaned_data['name'],
-                            description=form.cleaned_data['description'],
-                            qtype=form.cleaned_data['qtype'],
-                            division=request.person.division,
-                            owner=request.person,
-                            active = False,
-                            archived = False,
-                        )
+                if question.owner == request.person:    # Свой вопрос создаём из формы
+                    copy_question = Question.objects.create(
+                        name=form.cleaned_data['name'],
+                        description=form.cleaned_data['description'],
+                        qtype=form.cleaned_data['qtype'],
+                        division=request.person.division,
+                        owner=request.person,
+                        active = False,
+                        archived = False,
+                    )
+                    if has_answers:
+                        copy_answers(source=question, target=copy_question)
             elif request.POST.get('del'):   # Удалить не связанные и архивирвоать связанные.
                 if has_answers:
                     question.archived = True

@@ -8,9 +8,9 @@
     {% csrf_token %}
     <div>
         <input type="submit" value="Сохранить" name="save" {% if readonly %}disabled{% endif %}>
+        <input type="submit" value="Скопировать" name="copy" {% if not question.id %}disabled{% endif %}>
         <input type="submit" value="Удалить" name="del" {% if not question.id or readonly %}disabled{% endif %}>
         <input type="submit" value="К вопросам" name="cancel">
-        <input type="submit" value="Дублировать" name="copy">
     </div>
 </form>
 
