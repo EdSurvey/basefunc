@@ -1,1 +1,1 @@
-from .questions import install
+from .querylists import install
