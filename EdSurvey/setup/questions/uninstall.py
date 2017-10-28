@@ -1,4 +1,4 @@
-# from ..querylists import uninstall
+from ..querylists import uninstall
 
 from questions.models import AnswerLL, AnswerCB, AnswerRB, Answer, Question
 
