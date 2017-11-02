@@ -1,0 +1,37 @@
+{% extends 'home.htm' %}
+{% block mainblock %}
+    <h1>Опросники</h1>
+
+<form action="{% url 'querylists:index' %}" method="post">
+    {% csrf_token %}
+
+    {% block resultblock %}
+        {{querylists_filter_block}}
+    {% endblock %}
+
+    <table border="1">
+        <tr bgcolor="#FFA500">
+            <th>Public</th>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Владелец</th>
+            <th>Организация</th>
+        </tr>
+    {% for querylist in querylists %}
+        <tr
+                {% if not querylist.active %} bgcolor="Tan"{% endif %}
+                {% if querylist.archived %} style="color: red" {% endif %}
+        >
+            <td>{% if querylist.public %} Да {% else %} Нет {% endif %}</td>
+            <td>{{querylist.name}}</td>
+            <td>{{querylist.description}}</td>
+            <td>{{querylist.owner}}</td>
+            <td>{{querylist.division}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    <input type="submit" value="Новый Опросник" name="new">
+
+</form>
+{% endblock %}
