@@ -10,6 +10,8 @@ class QueryList(models.Model):
     division = models.ForeignKey(Division, on_delete=models.PROTECT)
     public = models.BooleanField(default=False)
     owner = models.ForeignKey(Person, on_delete=models.PROTECT, verbose_name='владелец')
+    active = models.BooleanField('активный', default=True)
+    archived = models.BooleanField('архивный', default=False)
 
     class Meta:
         verbose_name = 'Опросник'
