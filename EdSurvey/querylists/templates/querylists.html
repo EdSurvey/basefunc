@@ -23,7 +23,7 @@
                 {% if querylist.archived %} style="color: red" {% endif %}
         >
             <td>{% if querylist.public %} Да {% else %} Нет {% endif %}</td>
-            <td>{{querylist.name}}</td>
+            <td><a href="{% url 'querylists:editquerylist' querylist.id %}">{{querylist.name}} >></a></td>
             <td>{{querylist.description}}</td>
             <td>{{querylist.owner}}</td>
             <td>{{querylist.division}}</td>
