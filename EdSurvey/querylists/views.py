@@ -184,7 +184,7 @@ def form_querylist(request, querylist):
 
     if request.method == 'POST':
         if request.POST.get('cancel'):
-            return redirect(reverse("querylist:index"))
+            return redirect(reverse("querylists:index"))
         if request.POST.get('copy') and not querylist.owner == request.person:   # Чужой Опрос создаём из записи в БД
             copy_querylist = QueryList.objects.create(
                 name='(new)' + querylist.name,
