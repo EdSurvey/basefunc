@@ -17,6 +17,6 @@
     {% block qcontentsblock %}
         {{qcontentsblock}}
     {% endblock%}
-    {% if querylist.id and not readonly %}<a href="{ % url 'querylists:newcontent' querylist.id % }"> Добавить Вопрос в Опросник >> </a>{% endif %}
+    {% if querylist.id and not readonly %}<a href="{% url 'querylists:addqcontent' querylist.id %}"> Добавить Вопрос в Опросник >> </a>{% endif %}
 
 {% endblock %}

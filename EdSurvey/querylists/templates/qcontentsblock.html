@@ -12,7 +12,7 @@
 {% for qcontent in qcontents %}
     <tr>
         <td>{% if qcontent.ordernum %}{{qcontent.ordernum}}{% else %}-{% endif %}</td>
-        <td><a href="{ % url 'querylists:editcontent' qcontent.id % }">{{qcontent.question.name}}</a></td>
+        <td><a href="{% url 'querylists:editqcontent' qcontent.id %}">{{qcontent.question.name}}</a></td>
         <td>{{qcontent.question.get_qtype_display}}</td>
         <td>{{qcontent.question.owner}}</td>
         <td>{{qcontent.question.division}}</td>

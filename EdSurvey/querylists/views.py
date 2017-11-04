@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
 from querylists.models import QueryList, QueryContent
-from .forms import EditQueryListForm
+from .forms import EditQueryListForm, EditQueryContentForm
 
 #   querylists.views
 
@@ -176,12 +176,11 @@ def form_querylist(request, querylist):
     """
     readonly = is_readonly(request, querylist)
 
-    # TODO: Get QueryContents of the querylist.
+    # Get QueryContents of the querylist.
     qcontents = None
     if querylist.id:
         qcontents = QueryContent.objects.filter(querylist=querylist).order_by('ordernum')
     has_qcontents = qcontents and len(qcontents) > 0
-    print(qcontents)
 
     if request.method == 'POST':
         if request.POST.get('cancel'):
@@ -262,3 +261,60 @@ def qcontents_block(querylist, qcontents):
         )
     else:
         return ''
+
+
+@login_required(login_url='login')
+def new_qcontent(request, qlistid):
+    querylist = get_object_or_404(QueryList.with_perms.all(request.person), pk=qlistid)
+    qcontent = QueryContent()
+    qcontent.querylist = querylist
+    return form_qcontent(request, qcontent)
+
+
+@login_required(login_url='login')
+def edit_qcontent(request, qcontentid):
+    qcontent = get_object_or_404(QueryContent, pk=qcontentid)
+    if qcontent.check_perm(request.person):
+        return form_qcontent(request, qcontent)
+    else:
+        raise ObjectDoesNotExist
+
+
+def form_qcontent(request, qcontent):
+    readonly = is_readonly(request, qcontent.querylist)
+
+    if request.method == 'POST':
+        if request.POST.get('cancel'):
+            return redirect(reverse("querylists:editquerylist", args=[qcontent.querylist.id]))
+        form = EditQueryContentForm(request.POST, instance=qcontent)
+        if form.is_valid():
+            if request.POST.get('save'):
+                try:
+                    form.save(commit=True)
+                except ValidationError as e:
+                    messages.add_message(request, messages.ERROR, e.message)
+                    return redirect(request.path)
+            elif request.POST.get('del'):
+                if not qcontent.querylist.archived:
+                    try:
+                        qcontent.delete()
+                    except ValidationError as e:
+                        messages.add_message(request, messages.ERROR, e.message)
+                        return redirect(request.path)
+            return redirect(reverse("querylists:editquerylist", args=[qcontent.querylist.id]))
+    else:
+        form = EditQueryContentForm(instance=qcontent)
+        if readonly:
+            for field in form.fields:
+                form.fields[field].widget.attrs['disabled'] = 'disabled'
+
+    return render(
+        request,
+        "editqcontent.html",
+        {
+            'querylist': qcontent.querylist,
+            'form': form,
+            'qcontent': qcontent,
+            'readonly': readonly,
+        }
+    )
