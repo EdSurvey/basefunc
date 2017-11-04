@@ -1,0 +1,38 @@
+    <div>
+        <input type="submit" value="Все" name="set_all">
+        <input type="submit" value="Сбросить" name="default">
+
+        <input type="checkbox" name="choice_pub" id="choice_pub" value="pub"
+               {% if flt_q_pub %} checked {% endif %}
+        />
+        <label for="choice_pub">Публичные</label>
+
+        <input type="checkbox" name="choice_own" id="choice_own" value="own"
+               {% if flt_q_own %} checked {% endif %}
+        />
+        <label for="choice_own">Мои</label>
+
+        <input type="checkbox" name="choice_oth" id="choice_oth" value="oth"
+               {% if flt_q_oth %} checked {% endif %}
+        />
+        <label for="choice_oth">Другие</label>
+
+        <input type="checkbox" name="choice_act" id="choice_act" value="act"
+               {% if flt_q_act %} checked {% endif %}
+        />
+        <label for="choice_act">Активные</label>
+
+        <input type="checkbox" name="choice_hid" id="choice_hid" value="hid"
+               {% if flt_q_hid %} checked {% endif %}
+        />
+        <label for="choice_hid">Скрытые</label>
+
+        <input type="checkbox" name="choice_arc" id="choice_arc" value="arc"
+               {% if flt_q_arc %} checked {% endif %}
+        />
+        <label for="choice_arc">Архивные</label>
+
+        <input type="submit" value="Показать" name="filter">
+    </div>
+
+    <hr border-color="#7b6b6b">

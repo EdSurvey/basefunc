@@ -1,0 +1,22 @@
+{% extends 'home.htm' %}
+{% block mainblock %}
+
+<h2>Опросник:</h2>
+
+<form method="post">
+    {{form.as_p}}
+    {% csrf_token %}
+    <div>
+        <input type="submit" value="Сохранить" name="save" {% if readonly %}disabled{% endif %}>
+        <input type="submit" value="Скопировать" name="copy" {% if not querylist.id %}disabled{% endif %}>
+        <input type="submit" value="Удалить" name="del" {% if not querylist.id or readonly %}disabled{% endif %}>
+        <input type="submit" value="К вопросам" name="cancel">
+    </div>
+</form>
+
+    {% block qcontentsblock %}
+        {{qcontentsblock}}
+    {% endblock%}
+    {% if querylist.id and not readonly %}<a href="{ % url 'querylists:newcontent' querylist.id % }"> Добавить Вопрос в Опросник >> </a>{% endif %}
+
+{% endblock %}
