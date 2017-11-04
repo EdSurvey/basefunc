@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
-from querylists.models import QueryList
+from querylists.models import QueryList, QueryContent
 from .forms import EditQueryListForm
 
 #   querylists.views
@@ -83,7 +83,7 @@ class Filter:
 
     def render_filter_form(self):
         return render_to_string(
-            'questionsfilterblock.html',
+            'qlistsfilterblock.html',
             {
                 'flt_q_pub': self.pub,
                 'flt_q_own': self.own,
@@ -176,8 +176,12 @@ def form_querylist(request, querylist):
     """
     readonly = is_readonly(request, querylist)
 
-    # TODO: Get QuesryContents of the querylist.
-    has_contents = True
+    # TODO: Get QueryContents of the querylist.
+    qcontents = None
+    if querylist.id:
+        qcontents = QueryContent.objects.filter(querylist=querylist).order_by('ordernum')
+    has_qcontents = qcontents and len(qcontents) > 0
+    print(qcontents)
 
     if request.method == 'POST':
         if request.POST.get('cancel'):
@@ -191,10 +195,10 @@ def form_querylist(request, querylist):
                 active=False,
                 archived=False,
             )
-            if has_contents: pass
+            if has_qcontents: pass
                 # copy_contents(source=question, target=copy_question)
             return redirect(reverse("querylists:index"))
-        form = EditQueryListForm(request.POST, instance=querylist, readonly=readonly, contents=has_contents)
+        form = EditQueryListForm(request.POST, instance=querylist, readonly=readonly, contents=has_qcontents)
         if form.is_valid():
             if request.POST.get('save'):
                 try:
@@ -233,7 +237,7 @@ def form_querylist(request, querylist):
 
             return redirect(reverse("querylists:index"))
     else:
-        form = EditQueryListForm(instance=querylist, readonly=readonly, contents=has_contents)
+        form = EditQueryListForm(instance=querylist, readonly=readonly, contents=has_qcontents)
 
     return render(
         request,
@@ -241,7 +245,20 @@ def form_querylist(request, querylist):
         {
             'querylist': querylist,
             'form': form,
-            # 'answersblock': answers_block(querylist, answers),
+            'qcontentsblock': qcontents_block(querylist, qcontents),
             'readonly': readonly,
         }
     )
+
+
+def qcontents_block(querylist, qcontents):
+    if querylist.id:
+        return render_to_string(
+            'qcontentsblock.html',
+            {
+                'querylist': querylist,
+                'qcontents': qcontents,
+            }
+        )
+    else:
+        return ''
