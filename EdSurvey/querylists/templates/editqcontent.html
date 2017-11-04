@@ -1,0 +1,16 @@
+{% extends 'home.htm' %}
+{% block mainblock %}
+
+<h2>Варианты ответов на вопрос:</h2>
+<h3>Вопрос: {{question.name}}</h3>
+<h3 >Задание: {{question.description|linebreaks}}</h3>
+
+<form method="post">
+    {{form.as_p}}
+    {% csrf_token %}
+    <input type="submit" value="Сохранить" name="save" {% if readonly %}disabled{% endif %}>
+    <input type="submit" value="Удалить" name="del" {% if not answer.id or readonly %}disabled{% endif %}>
+    <input type="submit" value="К вопросу" name="cancel">
+</form>
+
+{% endblock %}

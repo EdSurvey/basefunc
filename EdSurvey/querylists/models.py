@@ -4,6 +4,8 @@ from django.db import models
 from questions.models import Question
 from clients.models import Division, Person
 
+#   querylists.models
+
 
 class QuerylistManager(models.Manager):
 
@@ -44,6 +46,9 @@ class QueryContent(models.Model):
         verbose_name = 'Наполнение опросника'
         verbose_name_plural = 'Наполнение опросников'
         unique_together = ('querylist', 'question')
+
+    def check_perm(self, person):
+        return QueryList.with_perms.all(person).filter(pk=self.querylist.id)[:1].count() == 1
 
     def __str__(self):
         return "{}-{}".format(self.querylist, self.question)

@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 
-from .models import QueryList
+from .models import QueryList, QueryContent
 
 #   querylists.forms
 
@@ -26,3 +26,9 @@ class EditQueryListForm(ModelForm):
         if instance and instance.pk and self.readonly:
             for field in self.fields:
                 self.fields[field].widget.attrs['disabled'] = True
+
+
+class EditQueryContentForm(ModelForm):
+    class Meta:
+        model = QueryContent
+        fields = ['ordernum', 'question']
