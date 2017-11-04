@@ -1,7 +1,18 @@
+from django.db.models.query_utils import Q
 from django.db import models
 
 from questions.models import Question
 from clients.models import Division, Person
+
+
+class QuerylistManager(models.Manager):
+
+    @staticmethod
+    def filter_expr(person):
+        return Q(public=True) | (Q(owner=person) & Q(division=person.division))
+
+    def all(self, person):
+        return super().get_queryset().filter(self.filter_expr(person))
 
 
 class QueryList(models.Model):
@@ -12,6 +23,9 @@ class QueryList(models.Model):
     owner = models.ForeignKey(Person, on_delete=models.PROTECT, verbose_name='владелец')
     active = models.BooleanField('активный', default=True)
     archived = models.BooleanField('архивный', default=False)
+
+    objects = models.Manager()
+    with_perms = QuerylistManager()
 
     class Meta:
         verbose_name = 'Опросник'
