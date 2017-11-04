@@ -216,10 +216,10 @@ def form_querylist(request, querylist):
                         active = False,
                         archived = False,
                     )
-                    if has_contents:    pass
+                    if has_qcontents:    pass
                         # copy_answers(source=question, target=copy_question)
             elif request.POST.get('del'):   # Удалить не связанные и архивирвоать связанные.
-                if has_contents:
+                if has_qcontents:
                     querylist.archived = True
                     querylist.active = False
                     try:
