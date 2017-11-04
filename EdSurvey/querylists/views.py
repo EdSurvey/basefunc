@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.urls.base import reverse
 from django.db.models.query_utils import Q
 from django.template.loader import render_to_string
@@ -5,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
 from querylists.models import QueryList
+from .forms import EditQueryListForm
 
 #   querylists.views
 
@@ -128,7 +131,7 @@ def index(request):
 
     if request.method == 'POST':
         if request.POST.get("new"):
-            return redirect(reverse("querylists:newquestion"))
+            return redirect(reverse("querylists:newquerylist"))
         elif request.POST.get("filter"):
             filt.read_form(request)
         elif request.POST.get("default"):
@@ -145,4 +148,100 @@ def index(request):
             'querylists': querylists,
             'querylists_filter_block': filt.render_filter_form(),
         },
+    )
+
+
+@login_required(login_url='login')
+def new_querylist(request):
+    querylist = QueryList()
+    querylist.name = "о чём Опросник"
+    querylist.description = "более подробное описание Опросника"
+    querylist.division = request.person.division
+    querylist.owner = request.person
+    querylist.active = False
+    querylist.archived = False
+    return form_querylist(request, querylist)
+
+
+@login_required(login_url='login')
+def edit_querylist(request, querylistid):
+    querylist = get_object_or_404(QueryList.with_perms.all(request.person), pk=querylistid)
+    return form_querylist(request, querylist)
+
+
+def form_querylist(request, querylist):
+    """ Форма редактирования/просмотра Опросника.
+
+    Вызывается при создании нового и редактирования существующего Опрсника.
+    """
+    readonly = is_readonly(request, querylist)
+
+    # TODO: Get QuesryContents of the querylist.
+    has_contents = True
+
+    if request.method == 'POST':
+        if request.POST.get('cancel'):
+            return redirect(reverse("querylist:index"))
+        if request.POST.get('copy') and not querylist.owner == request.person:   # Чужой Опрос создаём из записи в БД
+            copy_querylist = QueryList.objects.create(
+                name='(new)' + querylist.name,
+                description=querylist.description,
+                division=request.person.division,
+                owner=request.person,
+                active=False,
+                archived=False,
+            )
+            if has_contents: pass
+                # copy_contents(source=question, target=copy_question)
+            return redirect(reverse("querylists:index"))
+        form = EditQueryListForm(request.POST, instance=querylist, readonly=readonly, contents=has_contents)
+        if form.is_valid():
+            if request.POST.get('save'):
+                try:
+                    form.save(commit=True)
+                except ValidationError as e:
+                    messages.add_message(request, messages.ERROR, e.message)
+                    return redirect(request.path)
+            elif request.POST.get('copy'):   # Создать новый как копию текущего без сохранения изменений текущего.
+                if querylist.owner == request.person:    # Свой вопрос создаём из формы
+                    copy_question = QueryList.objects.create(
+                        name=form.cleaned_data['name'],
+                        description=form.cleaned_data['description'],
+                        qtype=form.cleaned_data['qtype'],
+                        division=request.person.division,
+                        owner=request.person,
+                        active = False,
+                        archived = False,
+                    )
+                    if has_contents:    pass
+                        # copy_answers(source=question, target=copy_question)
+            elif request.POST.get('del'):   # Удалить не связанные и архивирвоать связанные.
+                if has_contents:
+                    querylist.archived = True
+                    querylist.active = False
+                    try:
+                        querylist.save()
+                    except ValidationError as e:
+                        messages.add_message(request, messages.ERROR, e.message)
+                        return redirect(request.path)
+                else:
+                    try:
+                        querylist.delete()
+                    except ValidationError as e:
+                        messages.add_message(request, messages.ERROR, e.message)
+                        return redirect(request.path)
+
+            return redirect(reverse("querylists:index"))
+    else:
+        form = EditQueryListForm(instance=querylist, readonly=readonly, contents=has_contents)
+
+    return render(
+        request,
+        "editqlist.html",
+        {
+            'querylist': querylist,
+            'form': form,
+            # 'answersblock': answers_block(querylist, answers),
+            'readonly': readonly,
+        }
     )
