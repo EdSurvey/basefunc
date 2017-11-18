@@ -15,7 +15,7 @@
 
 [TERMS]: specs/TERMS.md "Термины и определения"
 [FR]: specs/FR.md "Функциональные требования"
-[UС]: specs/UI.md "Сценарии использования"
+[UC]: specs/UC.md "Сценарии использования"
 [UI]: specs/UI.md "Интерфейсы пользователя"
 [SCHEMAS]: specs/SCHEMAS.md "Альбом схем"
 
