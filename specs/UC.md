@@ -184,7 +184,7 @@
 
 ##### Предусловия выполнения процесса
 1. Пользователь авторизован.
-1. Пользователь перешёл на "Страницу Опросников" ([UI_page_querylist][UI_page_querylist]).
+1. Пользователь перешёл на "Страницу Опросников" ([UI_page_querylists][UI_page_querylists]).
 1. Сайт использует применённые последний раз значения критериев фильтра и сортировки.
 1. В текущем отображении "Таблицы Опросников" ([UI_tab_querylists][UI_tab_querylists]) отсутсвует необходимая информация.
 
@@ -214,7 +214,8 @@
 ##### Описание выполнения процесса
 1. Пользователь выполняет одно из действий:
     1. нажимает на кнопку "к Опроснику" на "Форма редактирования Вопроса" ([UI_frm_edit_question][UI_frm_edit_question])
-    1. нажимает на ссылку в колонке "id" соответсвующего Опросника в "Таблица Опросников" ([UI_tab_querylists][UI_tab_querylists]) на "Страница Опросников" ([UI_page_querylist][UI_page_querylist]).
+    1. нажимает на ссылку в колонке "id" соответсвующего Опросника в "Таблица Опросников" ([UI_tab_querylists][UI_tab_querylists]) на "Страница Опросников" ([UI_page_querylists][UI_page_querylists]).
+    1. нажимает на кнопку "Новый Опросник" на "Страница Опросников" ([UI_page_querylists][UI_page_querylists]).
     1. нажимает на ссылку с названием Опросника на "Страница Задач" ([UI_page_tasks][UI_page_tasks])
     1. нажимает на ссылку с названием Опросника на "Форма редактирования Задачи" ([UI_frm_edit_task][UI_frm_edit_task])
 1. Сайт отображает "Форма редактирования Опросника" ([UI_frm_edit_querylist][UI_frm_edit_querylist])
@@ -905,7 +906,7 @@
 [UI_frm_register]: UI.md#UI_frm_register
 [UI_frm_regconfirm]: UI.md#UI_frm_regconfirm
 [UI_frm_auth]: UI.md#UI_frm_auth
-[UI_page_querylist]: UI.md#UI_page_querylist
+[UI_page_querylists]: UI.md#UI_page_querylists
 [UI_frm_edit_querylist]: UI.md#UI_frm_edit_querylist
 [UI_tab_querylists]: UI.md#UI_tab_querylists
 [UI_frm_filter_querylist]: UI.md#UI_frm_filter_querylist
