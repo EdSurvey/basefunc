@@ -179,7 +179,7 @@
 Выполняет | [Пользователь][user].
 Цель | Найти один или несколько Опросников.
 Входящие данные и документы | 1. Значения атрибутов Опросника.
-Данные поступают из | 1. Внешняя среда. 2. записи БД об Опросниках ([querylist][querylist]).
+Данные поступают из | 1. Внешняя среда. 2. записи БД об Опросниках ([FR_querylist][FR_querylist]).
 Выходящие данные и документы | "Страница Опросников" ([UI_page_querylist][UI_page_querylist]).
 
 ##### Предусловия выполнения процесса
@@ -189,7 +189,7 @@
 1. В текущем отображении "Таблицы Опросников" ([UI_tab_querylists][UI_tab_querylists]) отсутсвует необходимая информация.
 
 ##### Описание выполнения процесса
-1. Пользователь на "Форме фильтра Опросников" [UI_frm_filter_querylist][UI_frm_filter_querylist] устанавливает критерии в необходимые значения.
+1. Пользователь на "Форме фильтра Опросников" ([UI_frm_filter_querylist][UI_frm_filter_querylist]) устанавливает критерии в необходимые значения.
 1. При необходимости вернуть значения фильтров в состояние до полседнего применения Пользователь нажимает кнопку "Сброс".
 1. Когда все критерии установлены в необходимые значения Пользователь нажимает кнопку "Применить".
 1. Сайт обрабатывает критерии и заново формирует страницу.
@@ -204,9 +204,9 @@
 ---|---
 Выполняет | [Пользователь][user].
 Цель | Изменить атрибуты Опросника.
-Входящие данные и документы | 1. Значения атрибутов Опросника. 2. Запись БД об Опроснике ([querylist][querylist]).
+Входящие данные и документы | 1. Значения атрибутов Опросника. 2. Запись БД об Опроснике ([FR_querylist][FR_querylist]).
 Данные поступают из | 1. Внешняя среда.
-Выходящие данные и документы |  1. Запись БД об Опроснике ([querylist][querylist]).
+Выходящие данные и документы |  1. Запись БД об Опроснике ([FR_querylist][FR_querylist]).
 
 ##### Предусловия выполнения процесса
 1. Пользователь авторизован.
@@ -220,7 +220,7 @@
 1. Сайт отображает "Форма редактирования Опросника" ([UI_frm_edit_querylist][UI_frm_edit_querylist])
 1. Пользователь изменяет значения атрибутов Опросника.
 1. Пользователь наживает кнопку "Сохранить".
-    1. Сайт проверяет корректность внесённых данных в соответсвии с FR([querylist][querylist])
+    1. Сайт проверяет корректность внесённых данных в соответсвии с [FR_querylist][FR_querylist])
     1. Если данные корректны, то:
         1. новые значения записываются в БД.
         1. Сайт обновляет текущую страницу новыми данными из БД.
@@ -868,17 +868,39 @@
 [UC_dashboard]: #UC_dashboard
 [UC_report]: #UC_report
 
+[site]: TERMS.md#site
 [guest]: TERMS.md#guest
+[user]: TERMS.md#user
+[person]: TERMS.md#person
+[question]: TERMS.md#question
+[answer]: TERMS.md#answer
+[qtype]: TERMS.md#qtype
+[RB]: TERMS.md#RB
+[CB]: TERMS.md#CB
+[LL]: TERMS.md#LL
+[querylist]: TERMS.md#querylist
+[task]: TERMS.md#task
+[schedule]: TERMS.md#schedule
+[owner]: TERMS.md#owner
 
-[question]: FR.md#question
-[answer]: FR.md#answer
-[querylist]: FR.md#querylist
-[querycontent]: FR.md#querycontent
-[task]: FR.md#task
-[schedule]: FR.md#schedule
-[attempt]: FR.md#attempt
-[anketa]: FR.md#anketa
-[result]: FR.md#result
+[FR_id]: FR.md#FR_id
+[FR_created]: FR.md#FR_created
+[FR_updated]: FR.md#FR_updated
+[FR_active]: FR.md#FR_active
+[FR_archived]: FR.md#FR_archived
+[FR_qtype]: FR.md#FR_qtype
+[FR_owner]: FR.md#FR_owner
+[FR_ordernum]: FR.md#FR_ordernum
+[FR_change_content]: FR.md#FR_change_content
+[FR_question]: FR.md#FR_question
+[FR_answer]: FR.md#FR_answer
+[FR_querylist]: FR.md#FR_querylist
+[FR_querycontent]: FR.md#FR_querycontent
+[FR_task]: FR.md#FR_task
+[FR_schedule]: FR.md#FR_schedule
+[FR_attempt]: FR.md#FR_attempt
+[FR_anketa]: FR.md#FR_anketa
+[FR_result]: FR.md#FR_result
 
 [UI_frm_register]: UI.md#UI_frm_register
 [UI_frm_regconfirm]: UI.md#UI_frm_regconfirm
