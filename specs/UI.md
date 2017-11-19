@@ -63,7 +63,7 @@
 
 ## Опросники
 
-### Страница Опросников - <a name="UI_page_querylist">UI_page_querylist</a>
+### Страница Опросников - <a name="UI_page_querylists">UI_page_querylists</a>
 
 ![Рис.P9.QueryLists Страница Опросников][P9.QueryLists]
 
@@ -230,7 +230,7 @@
 [UI_frm_register]: #UI_frm_register
 [UI_frm_regconfirm]: #UI_frm_regconfirm
 [UI_frm_auth]: #UI_frm_auth
-[UI_page_querylist]: #UI_page_querylist
+[UI_page_querylists]: #UI_page_querylists
 [UI_frm_edit_querylist]: #UI_frm_edit_querylist
 [UI_tab_querylists]: #UI_tab_querylists
 [UI_frm_filter_querylist]: #UI_frm_filter_querylist
