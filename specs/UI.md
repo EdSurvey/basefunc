@@ -6,6 +6,7 @@
 1. Аутентификация
     1. Форма аутентификации - [UI_frm_auth][UI_frm_auth]
 1. Опросники
+    1. Страница Опросников - [UI_page_querylists][UI_page_querylists]
     1. Форма редактирования Опросника - [UI_frm_edit_querylist][UI_frm_edit_querylist]
     1. Таблица Опросников - [UI_tab_querylists][UI_tab_querylists]
     1. Форма фильтра Опросников - [UI_frm_filter_querylist][UI_frm_filter_querylist]
@@ -18,6 +19,14 @@
     1. Форма редактирвоания Ответа общая - [UI_frm_edit_answer][UI_frm_edit_answer]
     1. Форма редактирвоания Ответа "Путанка" - [UI__frm_edit_answerll][UI__frm_edit_answerll]
     1. Форма ответа на Вопрос при выполнении Задания - [UI_frm_run_query][UI_frm_run_query]
+1. Задачи
+    1. Страница Задач - [UI_page_tasks][UI_page_tasks]
+    1. Форма редактирования Задачи - [UI_frm_edit_task][UI_frm_edit_task]
+    1. Таблица Задач - [UI_tab_tasks][UI_tab_tasks]
+1. Расписания
+    1. Страница Расписаний - [UI_page_tasks][UI_page_schedules]
+    1. Форма редактирования Расписания - [UI_frm_edit_schedule][UI_frm_edit_schedule]
+    1. Таблица Расписаний - [UI_tab_schedules][UI_tab_schedules]
 1. Задания
     1. Таблица Заданий - [UI_tab_surveys][UI_tab_surveys]
     1. Форма фильтра Заданий - [UI_frm_filter_surveys][UI_frm_filter_surveys]
@@ -53,6 +62,8 @@
 
 
 ## Опросники
+
+### Страница Опросников - <a name="UI_page_querylist">UI_page_querylist</a>
 
 ![Рис.P9.QueryLists Страница Опросников][P9.QueryLists]
 
@@ -144,6 +155,46 @@
 [в начало][top]
 
 
+## Задачи
+
+[в начало][top]
+
+
+### Страница Задач - <a name="UI_page_tasks">UI_page_tasks</a>
+
+[в начало][top]
+
+
+### Форма редактирования Задачи - <a name="UI_frm_edit_task">UI_frm_edit_task</a>
+
+[в начало][top]
+
+
+### Таблица Задач - <a name="UI_tab_tasks">UI_tab_tasks</a>
+
+[в начало][top]
+
+
+## Расписания
+
+[в начало][top]
+
+
+### Страница Расписаний - <a name="UI_page_schedules">UI_page_schedules</a>
+
+[в начало][top]
+
+
+### Форма редактирования Расписания - <a name="UI_frm_edit_schedule">UI_frm_edit_schedule</a>
+
+[в начало][top]
+
+
+### Таблица Расписаний - <a name="UI_tab_schedules">UI_tab_schedules</a>
+
+[в начало][top]
+
+
 ## Задания
 
 [в начало][top]
@@ -179,6 +230,7 @@
 [UI_frm_register]: #UI_frm_register
 [UI_frm_regconfirm]: #UI_frm_regconfirm
 [UI_frm_auth]: #UI_frm_auth
+[UI_page_querylist]: #UI_page_querylist
 [UI_frm_edit_querylist]: #UI_frm_edit_querylist
 [UI_tab_querylists]: #UI_tab_querylists
 [UI_frm_filter_querylist]: #UI_frm_filter_querylist
@@ -188,6 +240,12 @@
 [UI_tab_answers]: #UI_tab_answers
 [UI_frm_edit_answer]: #UI_frm_edit_answer
 [UI__frm_edit_answerll]: #UI__frm_edit_answerll
+[UI_page_tasks]: #UI_page_tasks
+[UI_frm_edit_task]: #UI_frm_edit_task
+[UI_tab_tasks]: #UI_tab_tasks
+[UI_page_schedules]: #UI_page_schedules
+[UI_frm_edit_schedule]: #UI_frm_edit_schedule
+[UI_tab_schedules]: #UI_tab_schedules
 [UI_frm_run_query]: #UI_frm_run_query
 [UI_tab_surveys]: #UI_tab_surveys
 [UI_frm_filter_surveys]: #UI_frm_filter_surveys
