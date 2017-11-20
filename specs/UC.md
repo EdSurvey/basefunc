@@ -3,52 +3,52 @@
 
 1. [Управление Пользователями][usermgmt]
     1. Регистрация
-        1. Зарегистрироваться - [UC_register][UC_register]
-        1. Подтверить регистрацию - [UC_reg_confirm][UC_reg_confirm]
-    1. Изменение параметров Пользователя - [UC_chg_usr_attr][UC_chg_usr_attr]
+        1. Зарегистрироваться ([UC_register][UC_register])
+        1. Подтверить регистрацию ([UC_reg_confirm][UC_reg_confirm])
+    1. Изменение параметров Пользователя ([UC_chg_usr_attr][UC_chg_usr_attr])
     1. Аутентификация
-        1. Вход - [UC_login][UC_login]
-        1. Выход - [UC_logoff][UC_logoff]
+        1. Вход ([UC_login][UC_login])
+        1. Выход ([UC_logoff][UC_logoff])
 1. [Управление Контентом][contentmgmt]
     1. Опросники
-        1. Создать Опросник - [UC_new_querylist][UC_new_querylist]
-        1. Найти Опросник - [UC_search_querylist][UC_search_querylist]
-        1. Изменить параметры Опросника - [UC_chg_querylist][UC_chg_querylist]
-        1. Активировать/Деактивировать Опросник - [UC_active_querylist][UC_active_querylist]
-        1. Изменить наполнение Опросника - [UC_chg_querycontent][UC_chg_querycontent]
-        1. Эмуляция Опросника - [UC_emu_querylist][UC_emu_querylist]
-        1. Перейти к Задачам по Опроснику - [UC_goto_task_by_querylist][UC_goto_task_by_querylist]
-        1. Архивировать Опросник - [UC_archive_querylist][UC_archive_querylist]
-        1. Удалить Опросник - [UC_del_querylist][UC_del_querylist]
+        1. Создать Опросник ([UC_new_querylist][UC_new_querylist])
+        1. Найти Опросник ([UC_search_querylist][UC_search_querylist])
+        1. Изменить параметры Опросника ([UC_chg_querylist][UC_chg_querylist])
+        1. Активировать/Деактивировать Опросник ([UC_active_querylist][UC_active_querylist])
+        1. Изменить наполнение Опросника ([UC_chg_querycontent][UC_chg_querycontent])
+        1. Эмуляция Опросника ([UC_emu_querylist][UC_emu_querylist])
+        1. Перейти к Задачам по Опроснику ([UC_goto_task_by_querylist][UC_goto_task_by_querylist])
+        1. Архивировать Опросник ([UC_archive_querylist][UC_archive_querylist])
+        1. Удалить Опросник ([UC_del_querylist][UC_del_querylist])
     1. Вопрос
-        1. Создать Вопрос - [UC_new_question][UC_new_question]
-        1. Изменить Вопрос - [UC_chg_question][UC_chg_question]
-            1. Добавить вариант Ответ - [UC_new_answer][UC_new_answer]
-            1. Изменить вариант Ответа - [UC_chg_answer][UC_chg_answer]
-            1. Удалить вариант Ответа - [UC_del_answer][UC_del_answer]
-        1. Предпросмотр Вопроса - [UC_emu_question][UC_emu_question]
-        1. Удалить Вопрос - [UC_del_question][UC_del_question]
+        1. Создать Вопрос ([UC_new_question][UC_new_question])
+        1. Изменить Вопрос ([UC_chg_question][UC_chg_question])
+            1. Добавить вариант Ответ ([UC_new_answer][UC_new_answer])
+            1. Изменить вариант Ответа ([UC_chg_answer][UC_chg_answer])
+            1. Удалить вариант Ответа ([UC_del_answer][UC_del_answer])
+        1. Предпросмотр Вопроса ([UC_emu_question][UC_emu_question])
+        1. Удалить Вопрос ([UC_del_question][UC_del_question])
     1. Задачи
-        1. Добавить Задачу - [UC_new_task][UC_new_task]
+        1. Добавить Задачу ([UC_new_task][UC_new_task])
         1. Найти Задачи
-            1. по Опроснику - [UC_search_task_by_querylist][UC_search_task_by_querylist] (через Опросник)
-            1. по Расписанию - [UC_search_task_by_schedule][UC_search_task_by_schedule] (через Задание)
-        1. Изменить параметры Задачи - [UC_chg_task][UC_chg_task]
-        1. Активировать/Деактивировать Задачу - [UC_active_task][UC_active_task]
-        1. Перейти к Опроснику этой Задачи - [UC_goto_querylist_by_task][UC_goto_querylist_by_task]
-        1. Перейти к Расписаниям по этой Задаче - [UC_goto_schedule_by_task][UC_goto_schedule_by_task]
-        1. Архивировать Задачу - [UC_archive_task][UC_archive_task]
-        1. Удалить Задачу - [UC_del_task][UC_del_task]
+            1. по Опроснику ([UC_search_task_by_querylist][UC_search_task_by_querylist]) (через Опросник)
+            1. по Расписанию ([UC_search_task_by_schedule][UC_search_task_by_schedule]) (через Задание)
+        1. Изменить параметры Задачи ([UC_chg_task][UC_chg_task])
+        1. Активировать/Деактивировать Задачу ([UC_active_task][UC_active_task])
+        1. Перейти к Опроснику этой Задачи ([UC_goto_querylist_by_task][UC_goto_querylist_by_task])
+        1. Перейти к Расписаниям по этой Задаче ([UC_goto_schedule_by_task][UC_goto_schedule_by_task])
+        1. Архивировать Задачу ([UC_archive_task][UC_archive_task])
+        1. Удалить Задачу ([UC_del_task][UC_del_task])
 1. [Выполнение Задания][survey]
-    1. Выбор доступного Задания - [UC_choice_survey][UC_choice_survey]
-    1. Запустить Задание - [UC_run_survey][UC_run_survey]
-    1. Ответить на Вопрос - [UC_run_query][UC_run_query]
-    1. Завершение Задания - [UC_finalize_survey][UC_finalize_survey]
-    1. Найти выполненные Задания - [UC_search_finished_survey][UC_search_finished_survey]
-    1. Просмотреть свои Ответы - [UC_view_results][UC_view_results]
+    1. Выбор доступного Задания ([UC_choice_survey][UC_choice_survey])
+    1. Запустить Задание ([UC_run_survey][UC_run_survey])
+    1. Ответить на Вопрос ([UC_run_query][UC_run_query])
+    1. Завершение Задания ([UC_finalize_survey][UC_finalize_survey])
+    1. Найти выполненные Задания ([UC_search_finished_survey][UC_search_finished_survey])
+    1. Просмотреть свои Ответы ([UC_view_results][UC_view_results])
 1. [Контроль Заданий][surveymgmt]
-    1. Статистика - [UC_dashboard][UC_dashboard]
-    1. Отчёты - [UC_report][UC_report]
+    1. Статистика ([UC_dashboard][UC_dashboard])
+    1. Отчёты ([UC_report][UC_report])
 
 
 ## <a name="usermgmt">Управление Пользователями</a>
@@ -61,17 +61,17 @@
 [в начало][top]
 
 
-#### Зарегистрироваться - <a name="UC_register">UC_register</a>
+#### Зарегистрироваться (<a name="UC_register">UC_register</a>)
 
 [в начало][top]
 
 
-#### Подтверить регистрацию - <a name="UC_reg_confirm">UC_reg_confirm</a>
+#### Подтверить регистрацию (<a name="UC_reg_confirm">UC_reg_confirm</a>)
 
 [в начало][top]
 
 
-### Изменение параметров Пользователя - <a name="UC_chg_usr_attr">UC_chg_usr_attr</a>
+### Изменение параметров Пользователя (<a name="UC_chg_usr_attr">UC_chg_usr_attr</a>)
 
 [в начало][top]
 
@@ -81,7 +81,7 @@
 [в начало][top]
 
 
-#### Вход - <a name="UC_login">UC_login</a>
+#### Вход (<a name="UC_login">UC_login</a>)
 
 Атрибут | Значение
 ---|---
@@ -107,7 +107,7 @@
 [в начало][top]
 
 
-#### Выход - <a name="UC_logoff">UC_logoff</a>
+#### Выход (<a name="UC_logoff">UC_logoff</a>)
 
 Атрибут | Значение
 ---|---
@@ -124,7 +124,6 @@
 1. Пользователь нажимает на ссылку "Выход".
 2. Сайт отменяет текущую авторизацию Пользователя.
 3. Сайт переводит Посетителя на домашнюю страницу Сайта.
-
 
 [в начало][top]
 
@@ -153,7 +152,7 @@
 [в начало][top]
 
 
-#### Создать Опросник - <a name="UC_new_querylist">UC_new_querylist</a>
+#### Создать Опросник (<a name="UC_new_querylist">UC_new_querylist</a>)
 
 Атрибут | Значение
 ---|---
@@ -172,7 +171,7 @@
 [в начало][top]
 
 
-#### Найти Опросник - <a name="UC_search_querylist">UC_search_querylist</a>
+#### Найти Опросник (<a name="UC_search_querylist">UC_search_querylist</a>)
 
 Атрибут | Значение
 ---|---
@@ -198,7 +197,7 @@
 [в начало][top]
 
 
-#### Изменить параметры Опросника - <a name="UC_chg_querylist">UC_chg_querylist</a>
+#### Изменить параметры Опросника (<a name="UC_chg_querylist">UC_chg_querylist</a>)
 
 Атрибут | Значение
 ---|---
@@ -220,7 +219,7 @@
     1. нажимает на ссылку с названием Опросника на "Форма редактирования Задачи" ([UI_frm_edit_task][UI_frm_edit_task])
 1. Сайт отображает "Форма редактирования Опросника" ([UI_frm_edit_querylist][UI_frm_edit_querylist])
 1. Пользователь изменяет значения атрибутов Опросника.
-1. Пользователь наживает кнопку "Сохранить".
+1. Пользователь нажимает кнопку "Сохранить".
     1. Сайт проверяет корректность внесённых данных в соответсвии с [FR_querylist][FR_querylist])
     1. Если данные корректны, то:
         1. новые значения записываются в БД.
@@ -229,11 +228,10 @@
 1. нажимает на кнопку "Сбросить".
     1. Сайт обновляет текущую страницу данными до внесения изменений
 
-
 [в начало][top]
 
 
-#### Активировать/Деактивировать Опросник - <a name="UC_active_querylist">UC_active_querylist</a>
+#### Активировать/Деактивировать Опросник (<a name="UC_active_querylist">UC_active_querylist</a>)
 
 Атрибут | Значение
 ---|---
@@ -252,7 +250,7 @@
 [в начало][top]
 
 
-#### Изменить наполнение Опросника - <a name="UC_chg_querycontent">UC_chg_querycontent</a>
+#### Изменить наполнение Опросника (<a name="UC_chg_querycontent">UC_chg_querycontent</a>)
 
 Атрибут | Значение
 ---|---
@@ -271,7 +269,7 @@
 [в начало][top]
 
 
-#### Эмуляция Опросника - <a name="UC_emu_querylist">UC_emu_querylist</a>
+#### Эмуляция Опросника (<a name="UC_emu_querylist">UC_emu_querylist</a>)
 
 Атрибут | Значение
 ---|---
@@ -290,7 +288,7 @@
 [в начало][top]
 
 
-#### Перейти к Задачам по Опроснику - <a name="UC_goto_task_by_querylist">UC_goto_task_by_querylist</a>
+#### Перейти к Задачам по Опроснику (<a name="UC_goto_task_by_querylist">UC_goto_task_by_querylist</a>)
 
 Атрибут | Значение
 ---|---
@@ -309,7 +307,7 @@
 [в начало][top]
 
 
-#### Архивировать Опросник - <a name="UC_archive_querylist">UC_archive_querylist</a>
+#### Архивировать Опросник (<a name="UC_archive_querylist">UC_archive_querylist</a>)
 
 Атрибут | Значение
 ---|---
@@ -328,7 +326,7 @@
 [в начало][top]
 
 
-#### Удалить Опросник - <a name="UC_del_querylist">UC_del_querylist</a>
+#### Удалить Опросник (<a name="UC_del_querylist">UC_del_querylist</a>)
 
 Атрибут | Значение
 ---|---
@@ -352,7 +350,7 @@
 [в начало][top]
 
 
-##### Создать Вопрос - <a name="UC_new_question">UC_new_question</a>
+##### Создать Вопрос (<a name="UC_new_question">UC_new_question</a>)
 
 Атрибут | Значение
 ---|---
@@ -371,7 +369,7 @@
 [в начало][top]
 
 
-##### Изменить Вопрос - <a name="UC_chg_question">UC_chg_question</a>
+##### Изменить Вопрос (<a name="UC_chg_question">UC_chg_question</a>)
 
 Атрибут | Значение
 ---|---
@@ -390,7 +388,7 @@
 [в начало][top]
 
 
-###### Добавить вариант Ответ - <a name="UC_new_answer">UC_new_answer</a>
+###### Добавить вариант Ответ (<a name="UC_new_answer">UC_new_answer</a>)
 
 Атрибут | Значение
 ---|---
@@ -409,7 +407,7 @@
 [в начало][top]
 
 
-###### Изменить вариант Ответа - <a name="UC_chg_answer">UC_chg_answer</a>
+###### Изменить вариант Ответа (<a name="UC_chg_answer">UC_chg_answer</a>)
 
 Атрибут | Значение
 ---|---
@@ -428,7 +426,7 @@
 [в начало][top]
 
 
-###### Удалить вариант Ответа - <a name="UC_del_answer">UC_del_answer</a>
+###### Удалить вариант Ответа (<a name="UC_del_answer">UC_del_answer</a>)
 
 Атрибут | Значение
 ---|---
@@ -447,7 +445,7 @@
 [в начало][top]
 
 
-##### Предпросмотр Вопроса - <a name="UC_emu_question">UC_emu_question</a>
+##### Предпросмотр Вопроса (<a name="UC_emu_question">UC_emu_question</a>)
 
 Атрибут | Значение
 ---|---
@@ -466,7 +464,7 @@
 [в начало][top]
 
 
-##### Удалить Вопрос - <a name="UC_del_question">UC_del_question</a>
+##### Удалить Вопрос (<a name="UC_del_question">UC_del_question</a>)
 
 Атрибут | Значение
 ---|---
@@ -490,7 +488,7 @@
 [в начало][top]
 
 
-#### Добавить Задачу - <a name="UC_new_task">UC_new_task</a> (через Опросник)
+#### Добавить Задачу (<a name="UC_new_task">UC_new_task</a>) (через Опросник)
 
 Атрибут | Значение
 ---|---
@@ -514,7 +512,7 @@
 [в начало][top]
 
 
-##### по Опроснику - <a name="UC_search_task_by_querylist">UC_search_task_by_querylist</a> (через Опросник)
+##### по Опроснику (<a name="UC_search_task_by_querylist">UC_search_task_by_querylist</a>) (через Опросник)
 
 Атрибут | Значение
 ---|---
@@ -533,7 +531,7 @@
 [в начало][top]
 
 
-##### по Расписанию - <a name="UC_search_task_by_schedule">UC_search_task_by_schedule</a> (через Задание)
+##### по Расписанию (<a name="UC_search_task_by_schedule">UC_search_task_by_schedule</a>) (через Задание)
 
 Атрибут | Значение
 ---|---
@@ -552,7 +550,7 @@
 [в начало][top]
 
 
-#### Изменить параметры Задачи - <a name="UC_chg_task">UC_chg_task</a>
+#### Изменить параметры Задачи (<a name="UC_chg_task">UC_chg_task</a>)
 
 Атрибут | Значение
 ---|---
@@ -571,7 +569,7 @@
 [в начало][top]
 
 
-#### Активировать/Деактивировать Задачу - <a name="UC_active_task">UC_active_task</a>
+#### Активировать/Деактивировать Задачу (<a name="UC_active_task">UC_active_task</a>)
 
 Атрибут | Значение
 ---|---
@@ -590,7 +588,7 @@
 [в начало][top]
 
 
-#### Перейти к Опроснику этой Задачи - <a name="UC_goto_querylist_by_task">UC_goto_querylist_by_task</a>
+#### Перейти к Опроснику этой Задачи (<a name="UC_goto_querylist_by_task">UC_goto_querylist_by_task</a>)
 
 Атрибут | Значение
 ---|---
@@ -609,7 +607,7 @@
 [в начало][top]
 
 
-#### Перейти к Расписаниям по этой Задаче - <a name="UC_goto_schedule_by_task">UC_goto_schedule_by_task</a>
+#### Перейти к Расписаниям по этой Задаче (<a name="UC_goto_schedule_by_task">UC_goto_schedule_by_task</a>)
 
 Атрибут | Значение
 ---|---
@@ -628,7 +626,7 @@
 [в начало][top]
 
 
-#### Архивировать Задачу - <a name="UC_archive_task">UC_archive_task</a>
+#### Архивировать Задачу (<a name="UC_archive_task">UC_archive_task</a>)
 
 Атрибут | Значение
 ---|---
@@ -647,7 +645,7 @@
 [в начало][top]
 
 
-#### Удалить Задачу - <a name="UC_del_task">UC_del_task</a>
+#### Удалить Задачу (<a name="UC_del_task">UC_del_task</a>)
 
 Атрибут | Значение
 ---|---
@@ -685,7 +683,7 @@
 [в начало][top]
 
 
-### Выбор доступного Задания - <a name="UC_choice_survey">UC_choice_survey</a>
+### Выбор доступного Задания (<a name="UC_choice_survey">UC_choice_survey</a>)
 
 Атрибут | Значение
 ---|---
@@ -704,7 +702,7 @@
 [в начало][top]
 
 
-### Запустить Задание - <a name="UC_run_survey">UC_run_survey</a>
+### Запустить Задание (<a name="UC_run_survey">UC_run_survey</a>)
 
 Атрибут | Значение
 ---|---
@@ -723,7 +721,7 @@
 [в начало][top]
 
 
-### Ответить на Вопрос - <a name="UC_run_query">UC_run_query</a>
+### Ответить на Вопрос (<a name="UC_run_query">UC_run_query</a>)
 
 Атрибут | Значение
 ---|---
@@ -742,7 +740,7 @@
 [в начало][top]
 
 
-### Завершение Задания - <a name="UC_finalize_survey">UC_finalize_survey</a>
+### Завершение Задания (<a name="UC_finalize_survey">UC_finalize_survey</a>)
 
 Атрибут | Значение
 ---|---
@@ -761,7 +759,7 @@
 [в начало][top]
 
 
-### Найти выполненные Задания - <a name="UC_search_finished_survey">UC_search_finished_survey</a>
+### Найти выполненные Задания (<a name="UC_search_finished_survey">UC_search_finished_survey</a>)
 
 Атрибут | Значение
 ---|---
@@ -785,7 +783,7 @@
 [в начало][top]
 
 
-### Статистика - <a name="UC_dashboard">UC_dashboard</a>
+### Статистика (<a name="UC_dashboard">UC_dashboard</a>)
 
 Атрибут | Значение
 ---|---
@@ -804,7 +802,7 @@
 [в начало][top]
 
 
-### Отчёты - <a name="UC_report">UC_report</a>
+### Отчёты (<a name="UC_report">UC_report</a>)
 
 Атрибут | Значение
 ---|---
