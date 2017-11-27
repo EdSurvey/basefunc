@@ -20,6 +20,9 @@
 [P5.Schedules]: basefunc-P5-Schedules.png "Рис.P5.Schedules Страница Расписаний"
 ![Рис.P5.Schedules Страница Расписаний][P5.Schedules]
 
+[P5-Schedules]: P5-Schedules.png "Рис.P5.Schedules Страница Расписаний"
+![Рис.P5.Schedules Страница Расписаний][P5-Schedules]
+
 
 ### P6.Dashboard Страница Dashboard
 [P6.Dashboard]: basefunc-P6-Dashboard.png "Рис.P6.Dashboard Страница Dashboard"

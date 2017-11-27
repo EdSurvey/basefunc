@@ -101,7 +101,7 @@ Value | input type | input name | Описание
 
 Использует "Таблица Наполнения Опросника" ([UI_tab_querycontents][UI_tab_querycontents])
 
-##### Блок кнопок для полей атрибутов
+##### Блок кнопок для наполнения Опросника
 
 Value | input type | input name | Описание
 ---|---|---|---
@@ -136,7 +136,6 @@ Value | input type | input name | Описание
 неАктивные | Показывать вопросы с не установленным атрибутом “Активный” - Да/Нет. <br> Обратный к фильтру “Активный”. | Да
 Архивные | Показывать вопросы с атрибутом “Архивный” - Да/Нет. | Нет
 Последние | Отображать последние изменённые Опросники | 10
-
 
 [в начало][top]
 
@@ -327,3 +326,22 @@ Value | input type | input name | Описание
 [UC_view_results]: UC.md#UC_view_results
 [UC_dashboard]: UC.md#UC_dashboard
 [UC_report]: UC.md#UC_report
+
+[FR_id]: FR.md#FR_id
+[FR_created]: FR.md#FR_created
+[FR_updated]: FR.md#FR_updated
+[FR_active]: FR.md#FR_active
+[FR_archived]: FR.md#FR_archived
+[FR_qtype]: FR.md#FR_qtype
+[FR_owner]: FR.md#FR_owner
+[FR_ordernum]: FR.md#FR_ordernum
+[FR_change_content]: FR.md#FR_change_content
+[FR_question]: FR.md#FR_question
+[FR_answer]: FR.md#FR_answer
+[FR_querylist]: FR.md#FR_querylist
+[FR_querycontent]: FR.md#FR_querycontent
+[FR_task]: FR.md#FR_task
+[FR_schedule]: FR.md#FR_schedule
+[FR_attempt]: FR.md#FR_attempt
+[FR_anketa]: FR.md#FR_anketa
+[FR_result]: FR.md#FR_result
