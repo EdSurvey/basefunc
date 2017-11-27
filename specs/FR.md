@@ -1,31 +1,31 @@
 # <a name="top">Функциональные требования</a>
 
 1. Общеиспользуемые атрибуты для хранимых данных
-    1. Идентификатор - [FR_id][FR_id]
-    1. Время создания - [FR_created][FR_created]
-    1. Время изменения - [FR_updated][FR_updated]
-    1. Активность Контента - [FR_active][FR_active]
-    1. Архивное хранения Контента - [FR_archived][FR_archived]
-    1. Типы вопросов - [FR_qtype][FR_qtype]
-    1. Владелец - [FR_owner][FR_owner]
-    1. Порядок - [FR_ordernum][FR_ordernum]
-1. Общие условия возможности изменить Контент - [FR_change_content][FR_change_content]
+    1. Идентификатор ([FR_id][FR_id])
+    1. Время создания ([FR_created][FR_created])
+    1. Время изменения ([FR_updated][FR_updated])
+    1. Активность Контента ([FR_active][FR_active])
+    1. Архивное хранения Контента ([FR_archived][FR_archived])
+    1. Типы вопросов ([FR_qtype][FR_qtype])
+    1. Владелец ([FR_owner][FR_owner])
+    1. Порядок ([FR_ordernum][FR_ordernum])
+1. Общие условия возможности изменить Контент ([FR_change_content][FR_change_content])
 1. Модуль управления Контентом
-    1. Вопрос - [FR_question][FR_question]
-    1. Ответ - [FR_answer][FR_answer]
+    1. Вопрос ([FR_question][FR_question])
+    1. Ответ ([FR_answer][FR_answer])
         1. Базовый Ответ
         1. Ответ для Вопроса Типа "Один из"
         1. Ответ для Вопрсоа Типа "Несколько из"
         1. Ответ для Вопрсоа Типа "Путанка"
-    1. Опросник - [FR_querylist][FR_querylist]
-       1. Наполнение Опросника - [FR_querycontent][FR_querycontent]
+    1. Опросник ([FR_querylist][FR_querylist])
+       1. Наполнение Опросника ([FR_querycontent][FR_querycontent])
 1. Модуль управления Заданиями
-    1. Задача - [FR_task][FR_task]
-    1. Расписание - [FR_schedule][FR_schedule]
+    1. Задача ([FR_task][FR_task])
+    1. Расписание ([FR_schedule][FR_schedule])
 1. Модуль выполнения Заданий
-    1. Попытка - [FR_attempt][FR_attempt]
-    1. Анкета - [FR_anketa][FR_anketa]
-    1. Результаты - [FR_result][FR_result]
+    1. Попытка ([FR_attempt][FR_attempt])
+    1. Анкета ([FR_anketa][FR_anketa])
+    1. Результаты ([FR_result][FR_result])
 1. Модуль статистики и отчётов
     1. Dashboard
     1. Отчёты
@@ -35,7 +35,7 @@
 [в начало][top]
 
 
-### Идентификатор - <a name="FR_id">FR_id</a>
+### Идентификатор (<a name="FR_id">FR_id</a>)
 
  1. Имя поля в таблице БД - "id"
  1. Обязательный для заполнения.
@@ -44,7 +44,7 @@
 [в начало][top]
 
 
-### Время создания - <a name="FR_created">FR_created</a>
+### Время создания (<a name="FR_created">FR_created</a>)
 
  1. Имя поля в таблице БД - "created"
  1. Тип данных - Дата и время (datetime)
@@ -54,7 +54,7 @@
 [в начало][top]
 
 
-### Время изменения - <a name="FR_updated">FR_updated</a>
+### Время изменения (<a name="FR_updated">FR_updated</a>)
 
  1. Имя поля в таблице БД - "updated"
  1. Тип данных - Дата и время (datetime)
@@ -64,7 +64,7 @@
 [в начало][top]
 
 
-### Активность Контента - <a name="FR_active">FR_active</a>
+### Активность Контента (<a name="FR_active">FR_active</a>)
 
  1. Имя поля в таблице БД - "active"
  1. Тип данных - Логическое (boolean)
@@ -77,7 +77,7 @@
 [в начало][top]
 
 
-### Архивное хранения Контента - <a name="FR_archived">FR_archived</a>
+### Архивное хранения Контента (<a name="FR_archived">FR_archived</a>)
 
  1. Имя поля в таблице БД - "archived"
  1. Тип данных - Логическое (boolean)
@@ -93,7 +93,7 @@
 [в начало][top]
 
 
-### Типы вопросов - <a name="FR_qtype">FR_qtype</a>
+### Типы вопросов (<a name="FR_qtype">FR_qtype</a>)
 
  1. Имя поля в таблице БД - "qtype"
  1. Тип данных - строка(2)
@@ -107,7 +107,7 @@
 [в начало][top]
 
 
-### Владелец - <a name="FR_owner">FR_owner</a>
+### Владелец (<a name="FR_owner">FR_owner</a>)
 
  1. Имя поля в таблице БД - "owner"
  1. Тип данных - "id"
@@ -116,7 +116,7 @@
 [в начало][top]
 
 
-### Порядок - <a name="FR_ordernum">FR_ordernum</a>
+### Порядок (<a name="FR_ordernum">FR_ordernum</a>)
 
  1. Имя поля в таблице БД - начинаются с "ordernum"
  1. Тип данных - положительное целое
@@ -130,7 +130,7 @@
 [в начало][top]
 
 
-## Общие условия возможности изменить Контент - <a name="FR_change_content">FR_change_content</a>
+## Общие условия возможности изменить Контент (<a name="FR_change_content">FR_change_content</a>)
 
  1. Только Владелец может изменить свой Контент.
  2. Контент нельзя изменить в случаях, когда:
@@ -145,7 +145,7 @@
 
 [в начало][top]
 
-### Вопрос - <a name="FR_question">FR_question</a>
+### Вопрос (<a name="FR_question">FR_question</a>)
 
 Атрибут|название поля таблицы|Обязательность|Описание
 ---|---|---|---
@@ -160,7 +160,7 @@
 [в начало][top]
 
 
-### Ответ - <a name="FR_answer">FR_answer</a>
+### Ответ (<a name="FR_answer">FR_answer</a>)
 
 1. При создании Ответа для Вопроса атрибут "Тип" копируется в атрибут "Тип" Ответа.
 2. При изменении Ответа невозможно изменить атрибут "Тип".
@@ -211,7 +211,7 @@
 [в начало][top]
 
 
-### Опросник - <a name="FR_querylist">FR_querylist</a>
+### Опросник (<a name="FR_querylist">FR_querylist</a>)
 
  Атрибут|название поля таблицы|Обязательность|Описание
 ---|---|---|---
@@ -227,7 +227,7 @@
 [в начало][top]
 
 
-#### Наполнение Опросника - <a name="FR_querycontent">FR_querycontent</a>
+#### Наполнение Опросника (<a name="FR_querycontent">FR_querycontent</a>)
 
  Атрибут|название поля таблицы|Обязательность|Описание
 ---|---|---|---
@@ -247,7 +247,7 @@
 [в начало][top]
 
 
-### Задача - <a name="FR_task">FR_task</a>
+### Задача (<a name="FR_task">FR_task</a>)
 
  Атрибут|название поля таблицы|Обязательность|Описание
 ---|---|---|---
@@ -266,7 +266,7 @@
 [в начало][top]
 
 
-### Расписание - <a name="FR_schedule">FR_schedule</a>
+### Расписание (<a name="FR_schedule">FR_schedule</a>)
 
  Атрибут|название поля таблицы|Обязательность|Описание
 ---|---|---|---
@@ -288,7 +288,7 @@
 [в начало][top]
 
 
-### Попытка - <a name="FR_attempt">FR_attempt</a>
+### Попытка (<a name="FR_attempt">FR_attempt</a>)
 
  Атрибут|название поля таблицы|Обязательность|Описание
 ---|---|---|---
@@ -301,7 +301,7 @@
 [в начало][top]
 
 
-### Анкета - <a name="FR_anketa">FR_anketa</a>
+### Анкета (<a name="FR_anketa">FR_anketa</a>)
 
  Атрибут|название поля таблицы|Обязательность|Описание
 ---|---|---|---
@@ -317,7 +317,7 @@
 [в начало][top]
 
 
-### Результаты - <a name="FR_result">FR_result</a>
+### Результаты (<a name="FR_result">FR_result</a>)
 
  Атрибут|название поля таблицы|Обязательность|Описание
 ---|---|---|---
