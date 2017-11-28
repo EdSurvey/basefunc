@@ -42,10 +42,14 @@
 
 ### Форма регистрации (<a name="UI_frm_register">UI_frm_register</a>)
 
+Рис.F1.Register "Форма регистрации"
+
 [в начало][top]
 
 
 ### Форма подтверждения регистрации (<a name="UI_frm_regconfirm">UI_frm_regconfirm</a>)
+
+Рис.F2.RegConfirm "Форма подтверждения регистрации"
 
 [в начало][top]
 
@@ -58,6 +62,8 @@
 ### Форма аутентификации (<a name="UI_frm_auth">UI_frm_auth</a>)
 ![Рис.P2.Login.AuthForm Форма авторизации][P2-Login-AuthForm]
 
+Рис.F3.AuthLogin "Форма аутентификации"
+
 [в начало][top]
 
 
@@ -66,6 +72,8 @@
 ### Страница Опросников (<a name="UI_page_querylists">UI_page_querylists</a>)
 
 ![Рис.P9.QueryLists Страница Опросников][P9.QueryLists]
+
+Рис.P9.QueryLists "Страница Опросников"
 
 #### Активные элементы
 
