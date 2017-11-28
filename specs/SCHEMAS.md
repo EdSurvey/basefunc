@@ -1,6 +1,14 @@
 ## Альбом схем
 
 
+Рис.F1.Register "Форма регистрации" UI_frm_register
+Рис.F2.RegConfirm "Форма подтверждения регистрации" UI_frm_regconfirm
+Рис.F3.AuthLogin "Форма аутентификации" UI_frm_auth P2-Login-AuthForm
+
+Рис.P9.QueryLists "Страница Опросников" UI_frm_auth
+
+
+
 ### P1.HOME Домашняя страница
 [P1.HOME]: basefunc-P1-HOME.png "Рис.P1.HOME Домашняя страница"
 ![Рис.P1.HOME Домашняя страница][P1.HOME]
