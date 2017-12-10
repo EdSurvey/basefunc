@@ -60,3 +60,13 @@
 ### AD.CMS_module Архитектура модуля управления контентом
 [AD.CMS]: basefunc-AD-CMS_module.png "Рис.AD.CMS_module Модуль управления контентом"
 ![Рис.AD.CMS_module Модуль управления контентом][AD.CMS]
+
+
+### AD.Survey_module Архитектура модуля выполнения задания
+[AD.Survey]: basefunc-AD-Survey_module.png "Рис.AD.Survey_module Модуль выполнения задания"
+![Рис.AD.Survey_module Модуль выполнения задания][AD.Survey]
+
+
+### AD.Dashboard_module Архитектура модуля контроля заданий
+[AD.Dashboard]: basefunc-AD-Dashboard_module.png "Рис.AD.Dashboard_module Модуль Dashboard"
+![Рис.AD.Dashboard_module Модуль контроля заданий][AD.Dashboard]

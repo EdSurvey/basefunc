@@ -17,10 +17,13 @@
 
 ## <a name="achitecture">Общая архитектура Системы</a>
 
-![Рис.AD.COMMON Общая архитектура Системы][AD.COMMON]
-![Рис.AD.COMMON Общая архитектура Системы][AD.common]
+![Рис.AD.Modules Модули верхнего уровня][AD.Modules]
 
-Рис.AD.COMMON Общая архитектура Системы
+Рис.AD.Modules Модули верхнего уровня
+
+![Рис.AD.COMMON Пример: Общая архитектура Системы][AD.common]
+
+Рис.AD.COMMON Пример: Общая архитектура Системы
 
 [в начало][top]
 
@@ -32,15 +35,27 @@
 
 ## <a name="contentmgmt">Управление Контентом</a>
 
+![Рис.AD.CMS_module Модуль управления контентом][AD.CMS]
+
+Рис.AD.CMS_module Модуль управления контентом
+
 [в начало][top]
 
 
 ## <a name="survey">Выполнение Задания</a>
 
+![Рис.AD.Survey_module Модуль выполнения задания][AD.Survey]
+
+Рис.AD.Survey_module Модуль выполнения задания
+
 [в начало][top]
 
 
 ## <a name="surveymgmt">Контроль Заданий</a>
+
+![Рис.AD.Dashboard_module Модуль контроля заданий][AD.Dashboard]
+
+Рис.AD.Dashboard_module Модуль контроля заданий
 
 [в начало][top]
 
@@ -51,3 +66,8 @@
 [contentmgmt]: #contentmgmt
 [survey]: #survey
 [surveymgmt]: #surveymgmt
+
+[AD.Modules]: basefunc-AD-modules.png "Рис.AD.Modules Модули верхнего уровня"
+[AD.CMS]: basefunc-AD-CMS_module.png "Рис.AD.CMS_module Модуль управления контентом"
+[AD.Survey]: basefunc-AD-Survey_module.png "Рис.AD.Survey_module Модуль выполнения задания"
+[AD.Dashboard]: basefunc-AD-Dashboard_module.png "Рис.AD.Dashboard_module Модуль Dashboard"
