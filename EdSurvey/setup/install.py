@@ -1,1 +1,1 @@
-from .clients import install
+from .querylists import install

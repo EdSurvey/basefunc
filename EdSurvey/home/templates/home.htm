@@ -5,12 +5,30 @@
     <title>EdSurvey</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css" />
     <link rel="stylesheet" href="{% static 'main.css' %}" >
 </head>
 <body>
+
 <div class="page-header">
     <h1><a href="/">Education by Survey</a></h1>
     <h6><i>Самый простой способ получить ответ - задать вопрос.</i></h6>
+    <div align="right">
+        {% if person %}
+            Добро пожаловать, <a href="{% url 'clients:aka' %}">{{person}}</a>!
+            ({{person.role}} в {{person.division}})
+        {% else %}
+            Кто ты такой, {{user}}?
+        {% endif %}
+        {% if user.username %}
+            [ <a href="{% url 'logout' %}">выйти из {{user.username}}</a>]
+        {% else %}
+            [ <a href="{% url 'login' %}">Войти</a> ]
+        {% endif %}
+    </div>
+    <a href="/questions/">Вопросы</a> |
+    <a href="/querylists/">Опросники</a> |
     <a href="/admin/" target="_blank">Админка</a> |
 </div>
 
@@ -35,11 +53,11 @@
     {# ...тут будет дополнительная информация и новостная лента... #}
 {% endblock %}
 </div>
+<br>
 <hr border-color="#7b6b6b">
 <footer class="page-footer">
-    <a href="/admin/" target="_blank">Админка</a>
-    <h6><i>Самый простой способ получить ответ - задать вопрос.</i></h6>
-    <h6>
+    <br>
+    <h6 align="center">
         <a href="https://github.com/EdSurvey/basefunc" target="_blank">EdSurvey на GitHub</a> |
         <a href="https://docs.djangoproject.com/en/1.11/contents/" target="_blank">Django Docs</a> |
         <a href="http://htmlbook.ru/html" target="_blank">Справочник HTML4</a> |
@@ -48,7 +66,7 @@
         <a href="https://webref.ru/css" target="_blank">Справочник CSS</a> |
         <a href="http://htmlbook.ru/samcss" target="_blank">Самоучитель CSS</a>
     </h6>
-
+    <br>
 </footer>
 </body>
 </html>

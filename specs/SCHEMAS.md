@@ -50,3 +50,23 @@
 ### P11.ScheduleStat Статистика по Расписанию
 [P11.ScheduleStat]: basefunc-P11-ScheduleStat.png "Рис.P11.ScheduleStat Статистика по Расписанию"
 ![Рис.P11.ScheduleStat Статистика по Расписанию][P11.ScheduleStat]
+
+
+### AD.High-level_modules Архитектура модулей верхнего уровня
+[AD.Modules]: basefunc-AD-modules.png "Рис.AD.Modules Модули верхнего уровня"
+![Рис.AD.Modules Модули верхнего уровня][AD.Modules]
+
+
+### AD.CMS_module Архитектура модуля управления контентом
+[AD.CMS]: basefunc-AD-CMS_module.png "Рис.AD.CMS_module Модуль управления контентом"
+![Рис.AD.CMS_module Модуль управления контентом][AD.CMS]
+
+
+### AD.Survey_module Архитектура модуля выполнения задания
+[AD.Survey]: basefunc-AD-Survey_module.png "Рис.AD.Survey_module Модуль выполнения задания"
+![Рис.AD.Survey_module Модуль выполнения задания][AD.Survey]
+
+
+### AD.Dashboard_module Архитектура модуля контроля заданий
+[AD.Dashboard]: basefunc-AD-Dashboard_module.png "Рис.AD.Dashboard_module Модуль Dashboard"
+![Рис.AD.Dashboard_module Модуль контроля заданий][AD.Dashboard]

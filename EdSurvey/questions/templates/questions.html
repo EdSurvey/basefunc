@@ -1,0 +1,39 @@
+{% extends 'home.htm' %}
+{% block mainblock %}
+    <h1>Вопросы</h1>
+
+<form action="{% url 'questions:index' %}" method="post">
+    {% csrf_token %}
+
+    {% block resultblock %}
+        {{questions_filter_block}}
+    {% endblock %}
+
+    <table border="1">
+        <tr bgcolor="#FFA500">
+            <th>Public</th>
+            <th>Заголовок</th>
+            <th>Текст</th>
+            <th>Тип вопроса</th>
+            <th>Владелец</th>
+            <th>Организация</th>
+        </tr>
+    {% for question in questions %}
+        <tr
+                {% if not question.active %} bgcolor="Tan"{% endif %}
+                {% if question.archived %} style="color: red" {% endif %}
+        >
+            <td>{% if question.public %} Да {% else %} Нет {% endif %}</td>
+            <td><a href="{% url 'questions:editquestion' question.id %}">{{question.name}} >></a></td>
+            <td>{{question.description}}</td>
+            <td>{{question.get_qtype_display}}</td>
+            <td>{{question.owner}}</td>
+            <td>{{question.division}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    <input type="submit" value="Новый вопрос" name="new">
+
+</form>
+{% endblock %}

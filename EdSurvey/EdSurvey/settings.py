@@ -26,7 +26,7 @@ SECRET_KEY = 'q@$$c#9w!rd05kz_%umvg04wxv%qp^(c_cpd*(u5o_wb$_vmnk'
 DEBUG = True
 #ALLOWED_HOSTS = []
 #DEBUG = False
-ALLOWED_HOSTS = ['localhost','grestas.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', 'grestas.pythonanywhere.com', 'debvbox.gsihome.loc']
 
 
 # Application definition
@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'clients.apps.ClientsConfig',
-    # 'questions.apps.QuestionsConfig',
-    # 'querylists.apps.QuerylistsConfig',
+    'questions.apps.QuestionsConfig',
+    'querylists.apps.QuerylistsConfig',
     # 'schedules.apps.SchedulesConfig',
     # 'surveys.apps.SurveysConfig',
 ]
@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-#    'clients.middleware.PersonMiddleware',
+    'clients.middleware.PersonMiddleware',
 ]
 
 ROOT_URLCONF = 'EdSurvey.urls'
@@ -70,7 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
- #               'clients.context_processors.person',
+                'clients.context_processors.person',
             ],
         },
     },
