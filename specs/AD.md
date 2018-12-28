@@ -17,9 +17,9 @@
 
 ## <a name="achitecture">Общая архитектура Системы</a>
 
-![Рис.AD.Modules Модули верхнего уровня][AD.Modules]
+![Рис.AD.Modules Модули верхнего уровня v2][AD.Modules_v2]
 
-Рис.AD.Modules Модули верхнего уровня
+Рис.AD.Modules Модули верхнего уровня, версия 2.
 
 ![Рис.AD.COMMON Пример: Общая архитектура Системы][AD.common]
 
@@ -68,6 +68,7 @@
 [surveymgmt]: #surveymgmt
 
 [AD.Modules]: basefunc-AD-modules.png "Рис.AD.Modules Модули верхнего уровня"
+[AD.Modules_v2]: basefunc-AD-modules_v2.png "Рис.AD.Modules Модули верхнего уровня v2"
 [AD.CMS]: basefunc-AD-CMS_module.png "Рис.AD.CMS_module Модуль управления контентом"
 [AD.Survey]: basefunc-AD-Survey_module.png "Рис.AD.Survey_module Модуль выполнения задания"
 [AD.Dashboard]: basefunc-AD-Dashboard_module.png "Рис.AD.Dashboard_module Модуль Dashboard"
