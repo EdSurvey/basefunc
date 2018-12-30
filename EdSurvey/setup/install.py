@@ -1,1 +1,1 @@
-from .querylists import install
+from .schedules import install

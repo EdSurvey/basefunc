@@ -1,4 +1,4 @@
-# from ..schedules import uninstall
+from ..schedules import uninstall
 
 from querylists.models import QueryContent, QueryList
 
