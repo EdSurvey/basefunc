@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'clients.apps.ClientsConfig',
     'questions.apps.QuestionsConfig',
     'querylists.apps.QuerylistsConfig',
-    # 'schedules.apps.SchedulesConfig',
+    'schedules.apps.SchedulesConfig',
     # 'surveys.apps.SurveysConfig',
 ]
 
