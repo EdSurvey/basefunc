@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'questions.apps.QuestionsConfig',
     'querylists.apps.QuerylistsConfig',
     'schedules.apps.SchedulesConfig',
-    # 'surveys.apps.SurveysConfig',
+    'surveys.apps.SurveysConfig',
 ]
 
 MIDDLEWARE = [
