@@ -1,1 +1,1 @@
-from .schedules import install
+from .surveys import install
