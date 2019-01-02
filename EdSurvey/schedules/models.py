@@ -49,7 +49,7 @@ class ScheduleManager(models.Manager):
 
     @staticmethod
     def filter_expr(person):
-        return Q(public=True) | (Q(owner=person) & Q(division=person.division))
+        return Q(owner=person)
 
     def all(self, person):
         return super().get_queryset().filter(self.filter_expr(person))
@@ -63,7 +63,7 @@ class Schedule(models.Model):
     description = models.TextField(blank=True, null=True)
     name = models.CharField(max_length=60)
     owner = models.ForeignKey(Person, on_delete=models.PROTECT, verbose_name='владелец')
-    squads = models.ManyToManyField(Squad, blank=True, verbose_name='назначение')
+    # squads = models.ManyToManyField(Squad, blank=True, verbose_name='назначение')
 
     objects = models.Manager()
     with_perms = ScheduleManager()
