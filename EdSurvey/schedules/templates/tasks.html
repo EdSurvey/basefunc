@@ -17,7 +17,7 @@
 {% for task in tasks %}
         <tr>
             <td>{{task.id}}</td>
-            <td>{{task.name}}</td>
+            <td><a href="{% url 'schedules:edittask' task.id %}">{{task.name}} >></a></td>
             <td>{{task.description}}</td>
             <td>{{task.querylist.name}}</td>
             <td>{{task.attempts}}</td>
