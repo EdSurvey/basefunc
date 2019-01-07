@@ -1,0 +1,53 @@
+{% extends 'home.htm' %}
+{% block mainblock %}
+{% if opened %}
+    <h2>Расписание активных заданий</h2>
+    <table border="1">
+        <tr bgcolor="#FFA500">
+            <th>Начало</th>
+            <th>Конец</th>
+            <th>Описание</th>
+            <th>Расписание</th>
+            <th>Примечание</th>
+        </tr>
+{% for schedule in opened %}
+        <tr>
+            <td>{{schedule.start}}</td>
+            <td>{{schedule.finish}}</td>
+            <td>{{schedule.task.name}} - {{schedule.task.querylist.name}}</td>
+            <td>{{schedule.name}}</td>
+            <td>{{schedule.description}}</td>
+        </tr>
+{% endfor %}
+    </table>
+{% else %}
+    <h2>Доступных активных заданий не найдено.</h2>
+{% endif %}
+
+
+{% if closed %}
+    <h2>Расписание закрытых заданий</h2>
+    <table border="1">
+        <tr bgcolor="#FFA500">
+            <th>Начало</th>
+            <th>Конец</th>
+            <th>Описание</th>
+            <th>Расписание</th>
+            <th>Примечания</th>
+
+        </tr>
+{% for schedule in closed %}
+        <tr>
+            <td>{{schedule.start}}</td>
+            <td>{{schedule.finish}}</td>
+            <td>{{schedule.task.name}} - {{schedule.task.querylist.name}}</td>
+            <td>{{schedule.name}}</td>
+            <td> {{schedule.description}}</td>
+        </tr>
+{% endfor %}
+    </table>
+{% else %}
+    <h2>Закрытых заданий не найдено.</h2>
+{% endif %}
+
+{% endblock %}

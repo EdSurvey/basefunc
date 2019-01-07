@@ -1,6 +1,6 @@
 cd ~/PycharmProjects/EdSurvey/basefunc/EdSurvey
 workon django
-. alias
+. aliases
 makemigrations
 migrate
 manage createsuperuser
