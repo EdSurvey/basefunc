@@ -1,3 +1,4 @@
+#   querylists.views
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.urls.base import reverse
@@ -9,7 +10,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from querylists.models import QueryList, QueryContent
 from .forms import EditQueryListForm, EditQueryContentForm
 
-#   querylists.views
 
 DEFAULT_FILTER = (True, True, False, True, True, False)
 
