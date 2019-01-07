@@ -3,6 +3,7 @@
 
 {% if person %}
     <h3>Вы вошли как {{person}}!</h3>
+    <i>Your's thoken is {{token.key}}</i>
     <h4>Выберите другую Личность:</h4>
 
     <form action="{% url 'clients:aka' %}" method="post">

@@ -1,5 +1,6 @@
 #  clients.views
-
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
@@ -25,6 +26,7 @@ def touch_person(person):
     person.used = now()
     person.save()
 
+
 def log_in(request):
     form = AuthenticationForm()
     # form = LoginForm()
@@ -44,6 +46,7 @@ def log_in(request):
                 active_person = persons[0]
                 touch_person(active_person)
             request.session['person_id'] = active_person.id
+
             try:
                 return redirect(request.GET['next'])
             except MultiValueDictKeyError:
@@ -60,6 +63,7 @@ def log_out(request):
     return redirect(reverse('homepage'))
 
 
+@login_required(login_url='login')
 def aka(request):
     if request.method == 'POST' and request.POST.get("Ok") and request.POST.get('choice'):
         person_id = request.POST.get('choice')
@@ -68,8 +72,10 @@ def aka(request):
         request.session['person_id'] = person.id
         return redirect(reverse('homepage'))
     persons = Person.objects.filter(user=request.user)
+    token, created = Token.objects.get_or_create(user=request.user)
     return render(request,
                   'aka.html',
                   {
                       'persons': persons,
+                      'token': token,
                   },)

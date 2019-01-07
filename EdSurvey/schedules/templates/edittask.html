@@ -1,0 +1,22 @@
+{% extends 'home.htm' %}
+{% block mainblock %}
+
+<h2>Задание:</h2>
+
+<form method="post">
+    {{form.as_p}}
+    {% csrf_token %}
+    <div>
+        <input type="submit" value="Сохранить" name="save" {% if readonly %}disabled{% endif %}>
+        <input type="submit" value="Скопировать" name="copy" {% if not querylist.id %}disabled{% endif %}>
+        <input type="submit" value="Удалить" name="del" {% if not querylist.id or readonly %}disabled{% endif %}>
+        <input type="submit" value="К заданиям" name="cancel">
+    </div>
+</form>
+
+    {% block qcontentsblock %}
+        {{qcontentsblock}}
+    {% endblock%}
+    {% if task.id and not readonly %}<a href="{% url 'schedules:addschedule' task.id %}"> Добавить Расписание для Задания >> </a>{% endif %}
+
+{% endblock %}

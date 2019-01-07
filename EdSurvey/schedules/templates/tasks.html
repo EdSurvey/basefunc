@@ -1,0 +1,32 @@
+{% extends 'home.htm' %}
+{% block mainblock %}
+    <h2>Задания</h2>
+    <table border="1">
+        <tr bgcolor="#FFA500">
+            <th>№</th>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Опросник</th>
+            <th>Попыток</th>
+            <th>Просмотр</th>
+            <th>Повторно</th>
+            <th>Авто-закрытие</th>
+            <th>Публичное</th>
+            <th>Организация</th>
+        </tr>
+{% for task in tasks %}
+        <tr>
+            <td>{{task.id}}</td>
+            <td><a href="{% url 'schedules:edittask' task.id %}">{{task.name}} >></a></td>
+            <td>{{task.description}}</td>
+            <td>{{task.querylist.name}}</td>
+            <td>{{task.attempts}}</td>
+            <td>{{task.viewable}}</td>
+            <td>{{task.editable}}</td>
+            <td>{{task.autoclose}}</td>
+            <td>{{task.public}}</td>
+            <td>{{task.division.name}}</td>
+        </tr>
+{% endfor %}
+    </table>
+{% endblock %}

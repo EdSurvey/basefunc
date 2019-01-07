@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Third-Party Apps
+    'rest_framework',
+    'rest_framework.authtoken',
+    # Local Apps
     'home.apps.HomeConfig',
     'clients.apps.ClientsConfig',
     'questions.apps.QuestionsConfig',
@@ -45,6 +49,12 @@ INSTALLED_APPS = [
     'schedules.apps.SchedulesConfig',
     'surveys.apps.SurveysConfig',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
