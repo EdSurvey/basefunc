@@ -9,3 +9,6 @@ manage createsuperuser
     zxasqw12
 django-shell
     import setup
+
+DRF token authentifications
+site1: e999e29469f997b7f8fd89673686bf1d78c2b81d

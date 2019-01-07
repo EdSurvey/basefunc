@@ -1,5 +1,6 @@
 #  clients.views
-
+from rest_framework.authtoken.models import Token
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
@@ -25,6 +26,7 @@ def touch_person(person):
     person.used = now()
     person.save()
 
+
 def log_in(request):
     form = AuthenticationForm()
     # form = LoginForm()
@@ -44,6 +46,10 @@ def log_in(request):
                 active_person = persons[0]
                 touch_person(active_person)
             request.session['person_id'] = active_person.id
+
+            if request.POST.get("Token"):
+                token, created = Token.objects.get_or_create(user=user)
+                messages.add_message(request, messages.INFO, "Your's token is ".format(token.key))
             try:
                 return redirect(request.GET['next'])
             except MultiValueDictKeyError:

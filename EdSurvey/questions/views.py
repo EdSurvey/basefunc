@@ -339,3 +339,19 @@ def form_answer(request, answer):
             'readonly': readonly,
         }
     )
+
+
+# API using DRF
+
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+
+class ApiView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        """/questions/api/?format=json"""
+        content = {'message': 'Hello, World!'}
+        return Response(content)

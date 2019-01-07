@@ -46,5 +46,5 @@ fabric.properties
 
 .idea/
 EdSurvey/EdSurvey/__pycache__/
-EdSurvey/db.sqlite3
+EdSurvey/*.sqlite3
 wsgi_pythonanywhere.py
