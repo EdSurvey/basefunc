@@ -12,3 +12,4 @@ django-shell
 
 DRF token authentifications
 site1: e999e29469f997b7f8fd89673686bf1d78c2b81d
+site2: 'cafd17ce507240b2b6848960daac3d4c38f05898'

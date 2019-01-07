@@ -355,3 +355,15 @@ class ApiView(APIView):
         """/questions/api/?format=json"""
         content = {'message': 'Hello, World!'}
         return Response(content)
+
+
+from rest_framework import generics
+from .serializers import QuestionSerializer
+
+
+class QuestionView(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    model = Question
+    serializer_class = QuestionSerializer
+
+    queryset = Question.objects.all()

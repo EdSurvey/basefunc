@@ -13,4 +13,5 @@ urlpatterns = [
     # API using DRF
     # path('api/', views.ApiView.as_view(), name='api'),
     url(r'^api/', views.ApiView.as_view(), name='api'),
+    url(r'^list/', views.QuestionView.as_view(), name='question-list'),
 ]

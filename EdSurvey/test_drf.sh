@@ -1,1 +1,2 @@
-curl http://127.0.0.1:8010/questions/api/?format=json -H 'Authorization: Token e999e29469f997b7f8fd89673686bf1d78c2b81d'
+# curl http://127.0.0.1:8010/questions/api/?format=json -H 'Authorization: Token e999e29469f997b7f8fd89673686bf1d78c2b81d'
+curl http://localhost:8011/questions/list/ -H 'Accept: application/json; indent=4; Authorization: Token e999e29469f997b7f8fd89673686bf1d78c2b81d' -H 'Accept: application/json; indent=4'
